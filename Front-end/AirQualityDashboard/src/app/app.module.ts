@@ -12,6 +12,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UnitsComponent } from './components/units/units.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { InformationComponent } from './components/information/information.component';
+import { PageNotFoundComponent } from './components/extraComponents/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { InformationComponent } from './components/information/information.compo
     DashboardComponent,
     UnitsComponent,
     StatisticsComponent,
-    InformationComponent
+    InformationComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

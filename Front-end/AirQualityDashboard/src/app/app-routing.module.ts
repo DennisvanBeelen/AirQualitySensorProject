@@ -5,6 +5,7 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {InformationComponent} from './components/information/information.component';
 import {StatisticsComponent} from './components/statistics/statistics.component';
 import {UnitsComponent} from './components/units/units.component';
+import {PageNotFoundComponent} from './components/extraComponents/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {path: 'home', component: HomePageComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'information', component: InformationComponent},
   {path: 'statistics', component: StatisticsComponent},
   {path: 'units', component: UnitsComponent},
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
