@@ -1,0 +1,49 @@
+.home-container{
+  margin: 50px 20% 0 20%;
+}
+
+.home-image{
+  width: 100%;
+  border-radius: 5px;
+}
+
+.home-text{
+
+}
+
+.home-text-container{
+  margin-top: 20px;
+}
+
+.home-title{
+  margin-bottom: 0;
+}
+
+.flex-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.small-image{
+  width: 200px;
+}
+
+.copyrightText{
+  margin: 40px 0 5px 0;
+  text-align: center;
+  color: grey;
+  font-size: 75%;
+}
+
+@media (max-width: 1200px) {
+  .home-container{
+    margin: 50px 10% 0 10%;
+  }
+}
+
+@media (max-width: 800px) {
+  .home-container{
+    margin: 50px 2% 0 2%;
+  }
+}
+
