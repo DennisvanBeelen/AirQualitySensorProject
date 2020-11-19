@@ -1,5 +1,4 @@
 .home-container{
-  margin: 50px 20% 0 20%;
 }
 
 .home-image{
@@ -33,17 +32,5 @@
   text-align: center;
   color: grey;
   font-size: 75%;
-}
-
-@media (max-width: 1200px) {
-  .home-container{
-    margin: 50px 10% 0 10%;
-  }
-}
-
-@media (max-width: 800px) {
-  .home-container{
-    margin: 50px 2% 0 2%;
-  }
 }
 

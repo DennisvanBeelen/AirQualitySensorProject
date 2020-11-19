@@ -13,6 +13,13 @@ import { UnitsComponent } from './components/units/units.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { InformationComponent } from './components/information/information.component';
 import { PageNotFoundComponent } from './components/extraComponents/page-not-found/page-not-found.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatTableModule} from "@angular/material/table";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {CommonModule} from "@angular/common";
+import { UnitsPopupComponent } from './components/units/units-popup/units-popup.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -22,14 +29,21 @@ import { PageNotFoundComponent } from './components/extraComponents/page-not-fou
     UnitsComponent,
     StatisticsComponent,
     InformationComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    UnitsPopupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTooltipModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    CommonModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -9,6 +9,7 @@ import {PageNotFoundComponent} from './components/extraComponents/page-not-found
 
 const routes: Routes = [
   {path: 'home', component: HomePageComponent},
+  {path: '', component: HomePageComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'information', component: InformationComponent},
   {path: 'statistics', component: StatisticsComponent},

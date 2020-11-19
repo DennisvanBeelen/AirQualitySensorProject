@@ -13,3 +13,27 @@
 .toolbar-button{
   margin-right: 5px;
 }
+
+.router-container{
+  margin: 50px 20% 0 20%;
+}
+
+@media (max-width: 1200px) {
+  .router-container{
+    margin: 50px 10% 0 10%;
+  }
+}
+
+@media (max-width: 800px) {
+  .router-container{
+    margin: 50px 2% 0 2%;
+  }
+}
+
+@media (max-width: 600px) {
+  .toolbar-button{
+    margin-right: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
