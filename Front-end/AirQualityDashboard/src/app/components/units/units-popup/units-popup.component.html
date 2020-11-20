@@ -1,1 +1,15 @@
-<p>units-popup works!</p>
+<mat-dialog-content>
+  <div *ngIf="data.sensorData !== undefined">
+    <h1 class="popup-location">Location:  {{data.location}}</h1>
+    <h4 class="popup-id-and-time">Id:        {{data.id}}</h4>
+    <h4 class="popup-id-and-time">Timestamp: {{data.timestamp.toLocaleString()}}</h4>
+
+    <mat-divider class="popup-devider"></mat-divider>
+
+    <h3 class="popup-sensor" *ngFor="let sensor of data.sensorData; let i = index">{{sensor.sensorName}}
+      : {{sensor.sensorValue}}{{sensor.sensorDataUnit}}
+      <mat-icon class="safety_icon"
+                [ngStyle]="{'color': data.safetyColor[i]}">{{data.safetyRating[i]}}</mat-icon>
+    </h3>
+  </div>
+</mat-dialog-content>

@@ -20,6 +20,7 @@ import {MatInputModule} from "@angular/material/input";
 import {CommonModule} from "@angular/common";
 import { UnitsPopupComponent } from './components/units/units-popup/units-popup.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatDividerModule} from "@angular/material/divider";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,9 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatFormFieldModule,
     MatInputModule,
     CommonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDividerModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent],

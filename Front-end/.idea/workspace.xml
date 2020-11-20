@@ -42,7 +42,8 @@
       <workItem from="1605614807239" duration="32000" />
       <workItem from="1605777793761" duration="430000" />
       <workItem from="1605778234900" duration="310000" />
-      <workItem from="1605778557048" duration="14593000" />
+      <workItem from="1605778557048" duration="14665000" />
+      <workItem from="1605867227252" duration="12190000" />
     </task>
     <servers />
   </component>
@@ -62,5 +63,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="341" y="412" width="348" height="298" key="org.angular.cli.generate/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1605800327998" />
+    <state x="143" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1605877560911">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="143" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1605877560911" />
   </component>
 </project>

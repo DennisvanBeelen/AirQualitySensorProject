@@ -18,8 +18,9 @@ import {UnitsPopupComponent} from "./units-popup/units-popup.component";
 export class UnitsComponent implements OnInit {
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
-  columnsToDisplay = ['id', 'location', 'timestamp', 'sensorData'];
+  columnsToDisplay = ['location', 'id', 'timestamp', 'sensorData'];
   expandedElement: SensorUnits | null;
+  extraAllowance = 1.1; // amount you can go over sensorMin and sensorMax before getting a sad smiley.
 
   constructor(public dialog: MatDialog) {
   }
@@ -29,14 +30,78 @@ export class UnitsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openPopup(moduleRowData) {
-    this.dialog.open(UnitsPopupComponent, {data: {moduleData: moduleRowData}});
+  openPopup(sensorRowData) {
+    sensorRowData = this.addSafetyDataToDialogData(sensorRowData);
+    this.dialog.open(UnitsPopupComponent, {data: sensorRowData});
+  }
+
+  addSafetyDataToDialogData(sensorRowData){
+    sensorRowData.safetyRating = [];
+    sensorRowData.safetyColor = [];
+
+    for (let sensor of sensorRowData.sensorData){
+      let sr = this.getSafetyRating(sensor.sensorName, sensor.sensorValue);
+      sensorRowData.safetyRating.push(sr);
+      sensorRowData.safetyColor.push(this.getSafetyColorCode(sr))
+    }
+    return sensorRowData;
+  }
+
+  getSafetyColorCode(safetyRating: string) {
+    switch (safetyRating) {
+      case "mood":
+        return "#03EA18"
+
+      case "sentiment_dissatisfied":
+        return "#fbbe00"
+
+      case "mood_bad":
+        return "#ff0000"
+    }
+  }
+
+  getSafetyRating(sensorName, sensorValue) {
+    let sensor = this.getCorrectSensorType(sensorName);
+
+    if (sensorValue < sensor.maximumValue && sensorValue > sensor.minimalValue) {
+      return "mood"; // mood is happy smiley
+    } else if (sensorValue < (sensor.maximumValue * this.extraAllowance) && sensorValue > this.addExtraMinimalAllowance(sensor.minimalValue)) {
+      return "sentiment_dissatisfied"; // sentiment_dissatisfied is not super happy smiley
+    } else {
+      return "mood_bad"; // sad smiley
+    }
+  }
+
+  addExtraMinimalAllowance(value) {
+    if (value >= 0) {
+      return value * -this.extraAllowance;
+    } else {
+      return value * this.extraAllowance;
+    }
+  }
+
+  getCorrectSensorType(sensorName) {
+    switch (sensorName) {
+      case SensorType.BAROMETER.name:
+        return SensorType.BAROMETER;
+
+      case SensorType.ALTIMETER.name:
+        return SensorType.ALTIMETER;
+
+      case SensorType.TEMPERATURE.name:
+        return SensorType.TEMPERATURE;
+
+      case SensorType.HUMIDITY.name:
+        return SensorType.HUMIDITY;
+
+      case SensorType.AIRQUALITY.name:
+        return SensorType.AIRQUALITY;
+    }
   }
 
 
   ngOnInit(): void {
   }
-
 }
 
 export interface SensorUnits {
@@ -53,11 +118,11 @@ export interface Sensor {
 }
 
 export const SensorType = {
-  BAROMETER: {name: 'Barometer', unitType: 'bar',},
-  TEMPERATURE: {name: 'Temperature', unitType: '°',},
-  ALTIMETER: {name: 'Altimeter', unitType: 'meter',},
-  AIRQUALITY: {name: 'Air quality', unitType: '%',},
-  HUMIDITY: {name: 'humidity', unitType: '%',},
+  BAROMETER: {name: 'Barometer', unitType: ' bar', minimalValue: 1, maximumValue: 2},
+  TEMPERATURE: {name: 'Temperature', unitType: '°', minimalValue: 10, maximumValue: 30},
+  ALTIMETER: {name: 'Altimeter', unitType: ' meter', minimalValue: -5, maximumValue: 30},
+  AIRQUALITY: {name: 'Air quality', unitType: '%', minimalValue: 70, maximumValue: 100},
+  HUMIDITY: {name: 'humidity', unitType: '%', minimalValue: 25, maximumValue: 75},
 }
 
 const ELEMENT_DATA: SensorUnits[] = [

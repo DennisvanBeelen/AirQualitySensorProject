@@ -8,6 +8,7 @@
 
 .toolbar-title:hover{
   cursor: pointer;
+  width: 100px;
 }
 
 .toolbar-button{
@@ -16,6 +17,10 @@
 
 .router-container{
   margin: 50px 20% 0 20%;
+}
+
+.toolbar-container{
+
 }
 
 @media (max-width: 1200px) {
