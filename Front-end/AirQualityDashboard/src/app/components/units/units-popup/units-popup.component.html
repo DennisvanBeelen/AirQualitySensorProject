@@ -6,10 +6,13 @@
 
     <mat-divider class="popup-devider"></mat-divider>
 
-    <h3 class="popup-sensor" *ngFor="let sensor of data.sensorData; let i = index">{{sensor.sensorName}}
-      : {{sensor.sensorValue}}{{sensor.sensorDataUnit}}
-      <mat-icon class="safety_icon"
-                [ngStyle]="{'color': data.safetyColor[i]}">{{data.safetyRating[i]}}</mat-icon>
-    </h3>
+    <div *ngFor="let sensor of data.sensorData; let i = index" class="sensorDataText" (click)="sensorClicked(sensor)">
+      <h3 class="popup-sensor">{{sensor.sensorName}}
+        : {{sensor.sensorValue}}{{sensor.sensorDataUnit}}
+        <mat-icon class="safety_icon"
+                  [ngStyle]="{'color': data.safetyColor[i]}">{{data.safetyRating[i]}}</mat-icon>
+      </h3>
+    </div>
+
   </div>
 </mat-dialog-content>

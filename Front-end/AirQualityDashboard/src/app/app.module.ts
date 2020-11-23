@@ -21,6 +21,8 @@ import {CommonModule} from "@angular/common";
 import { UnitsPopupComponent } from './components/units/units-popup/units-popup.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatDividerModule} from "@angular/material/divider";
+import { InformationDisplayComponent } from './components/information/information-display/information-display.component';
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import {MatDividerModule} from "@angular/material/divider";
     StatisticsComponent,
     InformationComponent,
     PageNotFoundComponent,
-    UnitsPopupComponent
+    UnitsPopupComponent,
+    InformationDisplayComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import {MatDividerModule} from "@angular/material/divider";
     CommonModule,
     MatDialogModule,
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent],

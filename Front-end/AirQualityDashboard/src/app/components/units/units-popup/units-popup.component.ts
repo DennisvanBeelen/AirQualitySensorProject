@@ -14,4 +14,7 @@ export class UnitsPopupComponent implements OnInit {
     console.log(this.data)
   }
 
+  sensorClicked(sensor: any) {
+
+  }
 }
