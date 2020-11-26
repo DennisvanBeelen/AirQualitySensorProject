@@ -1,1 +1,10 @@
-<p>dashboard works!</p>
+<mat-grid-list cols="6" rowHeight="80vh">
+  <mat-grid-tile colspan="2">
+    <app-units [compactMode]="true"></app-units>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="4">
+    <app-statistics></app-statistics>
+  </mat-grid-tile>
+
+</mat-grid-list>
+

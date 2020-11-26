@@ -1,1 +1,28 @@
-<p>information-display works!</p>
+<div *ngIf="informationData; else elseBlock">
+  <div *ngIf="informationData.sensor; else notSensorInfoBlock">
+    <!--check if its sensor info or other info. so we can also display different kinda info.-->
+    <h1>Sensor: {{informationData.sensor.name}}</h1>
+    <p>Recomended values for a good and healthy envoirement are
+      between: <b>{{informationData.sensor.minimalValue}}{{informationData.sensor.unitType}}
+      & {{informationData.sensor.maximumValue}}{{informationData.sensor.unitType}}</b></p>
+
+    <h3>information:</h3>
+    <p style="white-space: pre-line;">{{informationData.sensor.sensorInfo}}</p>
+    <a href="{{informationData.sensor.infoLink}}">more information</a>
+  </div>
+
+  <ng-template #notSensorInfoBlock>
+    <h1>{{informationData.information.name}}</h1>
+    <a href="{{informationData.information.infoLink}}">more information</a>
+    <div *ngFor="let info of informationData.information.information" style="white-space: pre-line;">
+      <h3>{{info.header}}</h3>
+      <p>{{info.info}}</p>
+    </div>
+
+  </ng-template>
+
+</div>
+<ng-template #elseBlock>
+  <h1><- Click here for information about a subject.</h1>
+</ng-template>
+

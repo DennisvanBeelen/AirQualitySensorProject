@@ -22,7 +22,7 @@
     <td mat-cell *matCellDef="let element"> {{element.timestamp.toLocaleString()}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="sensorData">
+  <ng-container *ngIf="!compactMode" matColumnDef="sensorData">
     <th mat-header-cell *matHeaderCellDef class=""> Sensor data</th>
     <td mat-cell *matCellDef="let element" style="display: flex; flex-wrap: wrap;">
       <div *ngFor="let sensor of element.sensorData">
@@ -37,7 +37,7 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let sensorRowData; let i = index; columns: columnsToDisplay;"
+  <tr mat-row *matRowDef="let sensorRowData; let i = index; columns: columnsToDisplay;" class="unitRow"
       (click)="openPopup(sensorRowData)"></tr>
 
   <!-- Row shown when there is no matching data. -->

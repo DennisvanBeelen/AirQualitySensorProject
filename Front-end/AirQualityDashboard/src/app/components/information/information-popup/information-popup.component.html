@@ -1,0 +1,8 @@
+<div *ngIf="data">
+  <h1>Sensor: {{data.name}}</h1>
+  <p>Recomended values for a good and healthy envoirement are between: <b>{{data.minimalValue}}{{data.unitType}} & {{data.maximumValue}}{{data.unitType}}</b></p>
+
+  <h3>information:</h3>
+  <p>{{data.sensorInfo}}</p>
+  <a href="{{data.infoLink}}">more information</a>
+</div>

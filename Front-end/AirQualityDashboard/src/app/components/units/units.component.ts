@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
@@ -22,6 +22,7 @@ export class UnitsComponent implements OnInit {
   columnsToDisplay = ['location', 'id', 'timestamp', 'sensorData'];
   expandedElement: SensorUnits | null;
   extraAllowance = 1.1; // amount you can go over sensorMin and sensorMax before getting a sad smiley.
+  @Input() compactMode = false; // compact mode for dashboard.
 
   constructor(public dialog: MatDialog) {
   }
@@ -102,9 +103,13 @@ export class UnitsComponent implements OnInit {
 
 
   ngOnInit(): void {
+    if(this.compactMode){
+      this.columnsToDisplay = ['location', 'id', 'timestamp'];
+    }
   }
 }
 
+// mockdata untill we get a working DB.
 const ELEMENT_DATA: SensorUnits[] = [
   {
     id: 123456789,

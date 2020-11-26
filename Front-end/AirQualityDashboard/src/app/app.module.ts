@@ -23,6 +23,8 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatDividerModule} from "@angular/material/divider";
 import { InformationDisplayComponent } from './components/information/information-display/information-display.component';
 import {MatCardModule} from "@angular/material/card";
+import { InformationPopupComponent } from './components/information/information-popup/information-popup.component';
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import {MatCardModule} from "@angular/material/card";
     InformationComponent,
     PageNotFoundComponent,
     UnitsPopupComponent,
-    InformationDisplayComponent
+    InformationDisplayComponent,
+    InformationPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import {MatCardModule} from "@angular/material/card";
     MatDialogModule,
     MatDividerModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent],

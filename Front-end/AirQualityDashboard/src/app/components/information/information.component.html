@@ -1,11 +1,19 @@
 <div class="infoContainer">
   <div class="informationButtonContainer">
-    <h3 class="button-titles">Sensor types</h3>
-<!--    <button mat-raised-button class="informationButtons" *ngFor="let sensor of sensorType" (click)="informationButtonClicked()">test</button>-->
+    <h3 class="button-titles">Sensor types information</h3>
+    <button mat-raised-button class="informationButtons" (click)="sensorInformationButtonClicked(sensorType.BAROMETER)">{{sensorType.BAROMETER.name}}</button>
+    <button mat-raised-button class="informationButtons" (click)="sensorInformationButtonClicked(sensorType.AIRQUALITY)">{{sensorType.AIRQUALITY.name}}</button>
+    <button mat-raised-button class="informationButtons" (click)="sensorInformationButtonClicked(sensorType.HUMIDITY)">{{sensorType.HUMIDITY.name}}</button>
+    <button mat-raised-button class="informationButtons" (click)="sensorInformationButtonClicked(sensorType.TEMPERATURE)">{{sensorType.TEMPERATURE.name}}</button>
+    <button mat-raised-button class="informationButtons" (click)="sensorInformationButtonClicked(sensorType.ALTIMETER)">{{sensorType.ALTIMETER.name}}</button>
+
+    <h3 class="button-titles">Air quality information</h3>
+    <button *ngFor="let data of airQualityInformationData" mat-raised-button class="informationButtons" (click)="informationButtonClicked(data)">{{data.name}}</button>
+
   </div>
 
   <mat-card class="infoDisplayContainer">
-    <app-information-display></app-information-display>
+    <app-information-display [informationData]="informationData"></app-information-display>
   </mat-card>
 
 </div>
