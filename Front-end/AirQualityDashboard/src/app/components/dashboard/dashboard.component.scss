@@ -1,0 +1,25 @@
+.dashboard-row{
+  display: flex;
+}
+
+.unitpanel{
+  flex: 30%;
+}
+
+.statisticspanel{
+flex: 70%;
+}
+
+@media(max-width: 600px) {
+
+  .dashboard-row{
+    display: block;
+  }
+  .unitpanel{
+    flex: 100%;
+  }
+
+  .statisticspanel{
+    flex: 100%;
+  }
+}

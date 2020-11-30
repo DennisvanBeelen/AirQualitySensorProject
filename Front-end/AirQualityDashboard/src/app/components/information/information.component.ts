@@ -7,7 +7,7 @@ import {airQualityInformationObject, SensorType} from "../../interfaces";
   styleUrls: ['./information.component.scss']
 })
 export class InformationComponent implements OnInit {
-  sensorType = SensorType;
+  ST = [SensorType.BAROMETER, SensorType.AIRQUALITY, SensorType.HUMIDITY, SensorType.TEMPERATURE, SensorType.ALTIMETER]
   informationData;
   airQualityInformationData = airQualityInformationData;
 
@@ -59,7 +59,8 @@ const airQualityInformationData: airQualityInformationObject[] = [
       {
         header: "How to improve?",
         info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-      },]  },
+      },]
+  },
   {
     name: "What can you do?",
     infoLink: "https://www.wikipedia.org/",
@@ -75,6 +76,7 @@ const airQualityInformationData: airQualityInformationObject[] = [
       {
         header: "Really hard things to do",
         info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-      },]  },
+      },]
+  },
 
 ];

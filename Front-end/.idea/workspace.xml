@@ -54,6 +54,8 @@
       <workItem from="1605953676945" duration="472000" />
       <workItem from="1606123406014" duration="12816000" />
       <workItem from="1606393645999" duration="6918000" />
+      <workItem from="1606480513405" duration="1685000" />
+      <workItem from="1606739462085" duration="1022000" />
     </task>
     <servers />
   </component>
@@ -61,6 +63,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="629" y="298" key="EditFileWatcherDialog" timestamp="1606481428458">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="629" y="298" key="EditFileWatcherDialog/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1606481428458" />
     <state x="423" y="309" key="FileChooserDialogImpl" timestamp="1605954150740">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
