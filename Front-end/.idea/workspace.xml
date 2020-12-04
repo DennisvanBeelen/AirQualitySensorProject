@@ -11,6 +11,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -38,6 +39,11 @@
     <property name="ts.external.directory.path" value="D:\SoftwareEngineering\Software Projects\AirQualitySensorProject\Front-end\AirQualityDashboard\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\SoftwareEngineering\Software Projects\AirQualitySensorProject\Front-end\AirQualityDashboard\src\app" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -56,6 +62,7 @@
       <workItem from="1606393645999" duration="6918000" />
       <workItem from="1606480513405" duration="1685000" />
       <workItem from="1606739462085" duration="1022000" />
+      <workItem from="1607071812936" duration="11580000" />
     </task>
     <servers />
   </component>
@@ -80,6 +87,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="341" y="412" width="348" height="298" key="org.angular.cli.generate/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1606136745329" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1607087539861">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1607087539861" />
     <state x="143" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1605877560911">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
