@@ -25,4 +25,8 @@ export class UnitsPopupComponent implements OnInit {
   openPopup(sensorRowData) {
     this.dialog.open(InformationPopupComponent, {data: sensorRowData});
   }
+
+  createReadableTimestamp(timestamp) {
+    return new Date(timestamp.seconds * 1000).toLocaleString();
+  }
 }

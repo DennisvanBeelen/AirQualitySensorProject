@@ -1,11 +1,29 @@
+// export interface SensorUnits {
+//   id: number;
+//   location: string;
+//   timestamp: Date;
+//   sensorData: SensorData[];
+// }
+//
+// export interface SensorData {
+//   sensorName: string;
+//   sensorValue: number;
+//   sensorDataUnit: string;
+// }
+
 export interface SensorUnits {
   id: number;
   location: string;
   timestamp: Date;
-  sensorData: Sensor[];
+  sensorData: SensorData[];
 }
 
-export interface Sensor {
+export interface SensorData {
+  timestamp: Date,
+  dataBundle: DataBundle[]
+}
+
+export interface DataBundle {
   sensorName: string;
   sensorValue: number;
   sensorDataUnit: string;

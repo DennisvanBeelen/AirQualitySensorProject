@@ -1,10 +1,12 @@
 <div class="infoContainer">
   <div class="informationButtonContainer">
     <h3 class="button-titles">Sensor types information</h3>
-    <button *ngFor="let sensor of ST" mat-raised-button class="informationButtons" (click)="sensorInformationButtonClicked(sensor)">{{sensor.name}}</button>
+    <button *ngFor="let sensor of ST" mat-raised-button class="informationButtons"
+            (click)="sensorInformationButtonClicked(sensor)">{{sensor.name}}</button>
 
     <h3 class="button-titles">Air quality information</h3>
-    <button *ngFor="let data of infoData" mat-raised-button class="informationButtons" (click)="informationButtonClicked(data)">{{data.payload.doc.data().title}}</button>
+    <button *ngFor="let data of infoData" mat-raised-button class="informationButtons"
+            (click)="informationButtonClicked(data)">{{data.payload.doc.data().title}}</button>
 
   </div>
 

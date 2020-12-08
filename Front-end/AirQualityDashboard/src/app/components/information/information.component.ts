@@ -11,16 +11,14 @@ import {firebaseService} from "../../firebaseService";
 export class InformationComponent implements OnInit {
   ST = [SensorType.BAROMETER, SensorType.AIRQUALITY, SensorType.HUMIDITY, SensorType.TEMPERATURE, SensorType.ALTIMETER]
   informationData;
+  infoData;
 
   constructor( private firebaseServ: firebaseService) {
   }
 
-  infoData;
-
   ngOnInit(): void {
     this.firebaseServ.getLiveCollectionFromFirebase('InformationObjects').subscribe(data => (this.infoData = data));
   }
-
 
   sensorInformationButtonClicked(sensor) {
     this.informationData = {sensor: sensor};
@@ -28,6 +26,18 @@ export class InformationComponent implements OnInit {
 
   informationButtonClicked(information) {
     this.informationData = {information: information.payload.doc.data()};
+  }
+
+  addTestDataToDB(){
+    this.firebaseServ.setDataInFirebase('InformationObjects', 'testInfoObject5', {
+      title: "testInfo5",
+      infoLink: "www.wikipedia.org",
+      information: [
+        {header: 'testHeader1', info: 'this is the actual info that is going to inform you.'},
+        {header: 'testHeader1', info: 'this is the actual info that is going to inform you.'},
+        {header: 'testHeader2', info: 'this is the actual info that is going to inform you.'}
+      ]
+    })
   }
 }
 

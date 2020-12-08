@@ -2,7 +2,7 @@
   <div *ngIf="data.sensorData !== undefined">
     <h1 class="popup-location">Location:  {{data.location}}</h1>
     <h4 class="popup-id-and-time">Id:        {{data.id}}</h4>
-    <h4 class="popup-id-and-time">Timestamp: {{data.timestamp.toLocaleString()}}</h4>
+    <h4 class="popup-id-and-time">Timestamp: {{createReadableTimestamp(data.timestamp)}}</h4>
 
     <mat-divider class="popup-devider"></mat-divider>
 

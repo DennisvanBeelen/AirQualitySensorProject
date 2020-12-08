@@ -9,23 +9,23 @@
 
   <ng-container matColumnDef="location">
     <th mat-header-cell *matHeaderCellDef class="smallCell"> Location</th>
-    <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.payload.doc.data().location}} </td>
   </ng-container>
 
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef class="smallCell"> Id</th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.payload.doc.data().id}} </td>
   </ng-container>
 
   <ng-container matColumnDef="timestamp">
     <th mat-header-cell *matHeaderCellDef class="mediumCell"> Timestamp</th>
-    <td mat-cell *matCellDef="let element"> {{element.timestamp.toLocaleString()}} </td>
+    <td mat-cell *matCellDef="let element"> {{createReadableTimestamp(element.payload.doc.data().timestamp)}}</td>
   </ng-container>
 
   <ng-container *ngIf="!compactMode" matColumnDef="sensorData">
     <th mat-header-cell *matHeaderCellDef class=""> Sensor data</th>
     <td mat-cell *matCellDef="let element" style="display: flex; flex-wrap: wrap;">
-      <div *ngFor="let sensor of element.sensorData">
+      <div *ngFor="let sensor of element.payload.doc.data().sensorData">
         <div class="sensorDataStyling">
           <p>{{sensor.sensorName}}: {{sensor.sensorValue}}{{sensor.sensorDataUnit}}
             <mat-icon class="safety_icon"

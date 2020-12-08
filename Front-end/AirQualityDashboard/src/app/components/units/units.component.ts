@@ -4,9 +4,11 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
 import {UnitsPopupComponent} from "./units-popup/units-popup.component";
 import {SensorType, SensorUnits} from "../../interfaces";
+import {firebaseService} from "../../firebaseService";
 
 @Component({
   selector: 'app-units',
+  providers: [firebaseService],
   templateUrl: './units.component.html',
   styleUrls: ['./units.component.scss'],
   animations: [
@@ -18,13 +20,19 @@ import {SensorType, SensorUnits} from "../../interfaces";
 })
 export class UnitsComponent implements OnInit {
 
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource;
   columnsToDisplay = ['location', 'id', 'timestamp', 'sensorData'];
   expandedElement: SensorUnits | null;
-  extraAllowance = 1.1; // amount you can go over sensorMin and sensorMax before getting a sad smiley.
+  extraAllowance = 0.1; // amount you can go over sensorMin and sensorMax before getting a sad smiley.
   @Input() compactMode = false; // compact mode for dashboard.
+  sensorDataCollectioPath = 'sensorDataTest';
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private firebaseServ: firebaseService) {
+  }
+
+  ngOnInit(): void {
+    this.checkForCompactMode();
+    this.firebaseServ.getLiveCollectionFromFirebase(this.sensorDataCollectioPath).subscribe(data => (this.dataSource = new MatTableDataSource(data)));
   }
 
   applyFilter(event: Event) {
@@ -37,11 +45,12 @@ export class UnitsComponent implements OnInit {
     this.dialog.open(UnitsPopupComponent, {data: sensorRowData});
   }
 
-  addSafetyDataToDialogData(sensorRowData){
+  addSafetyDataToDialogData(sensorRowData) {
+    sensorRowData = sensorRowData.payload.doc.data();
     sensorRowData.safetyRating = [];
     sensorRowData.safetyColor = [];
 
-    for (let sensor of sensorRowData.sensorData){
+    for (let sensor of sensorRowData.sensorData) {
       let sr = this.getSafetyRating(sensor.sensorName, sensor.sensorValue);
       sensorRowData.safetyRating.push(sr);
       sensorRowData.safetyColor.push(this.getSafetyColorCode(sr))
@@ -67,18 +76,10 @@ export class UnitsComponent implements OnInit {
 
     if (sensorValue < sensor.maximumValue && sensorValue > sensor.minimalValue) {
       return "mood"; // mood is happy smiley
-    } else if (sensorValue < (sensor.maximumValue * this.extraAllowance) && sensorValue > this.addExtraMinimalAllowance(sensor.minimalValue)) {
+    } else if (sensorValue < (sensor.maximumValue + (sensor.maximumValue * this.extraAllowance)) && sensorValue > (sensor.minimalValue - (sensor.minimalValue * this.extraAllowance))) {
       return "sentiment_dissatisfied"; // sentiment_dissatisfied is not super happy smiley
     } else {
       return "mood_bad"; // sad smiley
-    }
-  }
-
-  addExtraMinimalAllowance(value) {
-    if (value >= 0) {
-      return value * -this.extraAllowance;
-    } else {
-      return value * this.extraAllowance;
     }
   }
 
@@ -101,56 +102,69 @@ export class UnitsComponent implements OnInit {
     }
   }
 
-
-  ngOnInit(): void {
-    if(this.compactMode){
+  checkForCompactMode() {
+    if (this.compactMode) {
       this.columnsToDisplay = ['location', 'id', 'timestamp'];
     }
   }
+
+  createReadableTimestamp(timestamp) {
+    return new Date(timestamp.seconds * 1000).toLocaleString();
+  }
+
+  // putTestDataInDB() {
+  //   for (let i = 0; i < ELEMENT_DATA.length; i++) {
+  //     this.firebaseServ.setDataInFirebase('sensorDataTest', ELEMENT_DATA[i].id + ELEMENT_DATA[i].location, ELEMENT_DATA[i])
+  //   }
+  // }
+
 }
 
 // mockdata untill we get a working DB.
-const ELEMENT_DATA: SensorUnits[] = [
-  {
-    id: 123456789,
-    location: "Livingroom",
-    timestamp: new Date(),
-    sensorData: [
-      {sensorName: SensorType.BAROMETER.name, sensorValue: 1.2, sensorDataUnit: SensorType.BAROMETER.unitType},
-      {sensorName: SensorType.ALTIMETER.name, sensorValue: 2, sensorDataUnit: SensorType.ALTIMETER.unitType},
-      {sensorName: SensorType.TEMPERATURE.name, sensorValue: 80, sensorDataUnit: SensorType.TEMPERATURE.unitType},
-      {sensorName: SensorType.HUMIDITY.name, sensorValue: 80, sensorDataUnit: SensorType.HUMIDITY.unitType},
-      {sensorName: SensorType.AIRQUALITY.name, sensorValue: 35, sensorDataUnit: SensorType.AIRQUALITY.unitType}]
-  },
-  {
-    id: 123876789,
-    location: "Bedroom",
-    timestamp: new Date(),
-    sensorData: [
-      {sensorName: SensorType.BAROMETER.name, sensorValue: 1.2, sensorDataUnit: SensorType.BAROMETER.unitType},
-      {sensorName: SensorType.ALTIMETER.name, sensorValue: 2, sensorDataUnit: SensorType.ALTIMETER.unitType},
-      {sensorName: SensorType.TEMPERATURE.name, sensorValue: 80, sensorDataUnit: SensorType.TEMPERATURE.unitType},
-      {sensorName: SensorType.HUMIDITY.name, sensorValue: 80, sensorDataUnit: SensorType.HUMIDITY.unitType},
-      {sensorName: SensorType.AIRQUALITY.name, sensorValue: 35, sensorDataUnit: SensorType.AIRQUALITY.unitType}]
-  }, {
-    id: 137656789,
-    location: "Attic",
-    timestamp: new Date(),
-    sensorData: [
-      {sensorName: SensorType.BAROMETER.name, sensorValue: 1.2, sensorDataUnit: SensorType.BAROMETER.unitType},
-      {sensorName: SensorType.ALTIMETER.name, sensorValue: 2, sensorDataUnit: SensorType.ALTIMETER.unitType},
-      {sensorName: SensorType.TEMPERATURE.name, sensorValue: 80, sensorDataUnit: SensorType.TEMPERATURE.unitType},
-      {sensorName: SensorType.HUMIDITY.name, sensorValue: 80, sensorDataUnit: SensorType.HUMIDITY.unitType},
-      {sensorName: SensorType.AIRQUALITY.name, sensorValue: 35, sensorDataUnit: SensorType.AIRQUALITY.unitType}]
-  }, {
-    id: 912987489,
-    location: "Office",
-    timestamp: new Date(),
-    sensorData: [
-      {sensorName: SensorType.BAROMETER.name, sensorValue: 1.2, sensorDataUnit: SensorType.BAROMETER.unitType},
-      {sensorName: SensorType.ALTIMETER.name, sensorValue: 2, sensorDataUnit: SensorType.ALTIMETER.unitType},
-      {sensorName: SensorType.TEMPERATURE.name, sensorValue: 80, sensorDataUnit: SensorType.TEMPERATURE.unitType},
-      {sensorName: SensorType.HUMIDITY.name, sensorValue: 80, sensorDataUnit: SensorType.HUMIDITY.unitType},
-      {sensorName: SensorType.AIRQUALITY.name, sensorValue: 35, sensorDataUnit: SensorType.AIRQUALITY.unitType}]
-  }
-];
+// let ELEMENT_DATA: SensorUnits[] = [
+//   {
+//     id: 123456789,
+//     location: "Livingroom",
+//     timestamp: new Date(),
+//     sensorData: [
+//       {sensorName: SensorType.BAROMETER.name, sensorValue: 1.2, sensorDataUnit: SensorType.BAROMETER.unitType},
+//       {sensorName: SensorType.ALTIMETER.name, sensorValue: 2, sensorDataUnit: SensorType.ALTIMETER.unitType},
+//       {sensorName: SensorType.TEMPERATURE.name, sensorValue: 80, sensorDataUnit: SensorType.TEMPERATURE.unitType},
+//       {sensorName: SensorType.HUMIDITY.name, sensorValue: 80, sensorDataUnit: SensorType.HUMIDITY.unitType},
+//       {sensorName: SensorType.AIRQUALITY.name, sensorValue: 35, sensorDataUnit: SensorType.AIRQUALITY.unitType}]
+//   },
+//   {
+//     id: 123876789,
+//     location: "Bedroom",
+//     timestamp: new Date(),
+//     sensorData: [
+//       {sensorName: SensorType.BAROMETER.name, sensorValue: 1.2, sensorDataUnit: SensorType.BAROMETER.unitType},
+//       {sensorName: SensorType.ALTIMETER.name, sensorValue: 2, sensorDataUnit: SensorType.ALTIMETER.unitType},
+//       {sensorName: SensorType.TEMPERATURE.name, sensorValue: 80, sensorDataUnit: SensorType.TEMPERATURE.unitType},
+//       {sensorName: SensorType.HUMIDITY.name, sensorValue: 80, sensorDataUnit: SensorType.HUMIDITY.unitType},
+//       {sensorName: SensorType.AIRQUALITY.name, sensorValue: 35, sensorDataUnit: SensorType.AIRQUALITY.unitType}]
+//   }, {
+//     id: 137656789,
+//     location: "Attic",
+//     timestamp: new Date(),
+//     sensorData: [
+//       {sensorName: SensorType.BAROMETER.name, sensorValue: 1.2, sensorDataUnit: SensorType.BAROMETER.unitType},
+//       {sensorName: SensorType.ALTIMETER.name, sensorValue: 2, sensorDataUnit: SensorType.ALTIMETER.unitType},
+//       {sensorName: SensorType.TEMPERATURE.name, sensorValue: 80, sensorDataUnit: SensorType.TEMPERATURE.unitType},
+//       {sensorName: SensorType.HUMIDITY.name, sensorValue: 80, sensorDataUnit: SensorType.HUMIDITY.unitType},
+//       {sensorName: SensorType.AIRQUALITY.name, sensorValue: 35, sensorDataUnit: SensorType.AIRQUALITY.unitType}]
+//   }, {
+//     id: 912987489,
+//     location: "Office",
+//     sensorData: [
+//       {
+//         timestamp: new Date(),
+//         data: [{sensorName: SensorType.BAROMETER.name, sensorValue: 1.2, sensorDataUnit: SensorType.BAROMETER.unitType},
+//           {sensorName: SensorType.ALTIMETER.name, sensorValue: 2, sensorDataUnit: SensorType.ALTIMETER.unitType},
+//           {sensorName: SensorType.TEMPERATURE.name, sensorValue: 80, sensorDataUnit: SensorType.TEMPERATURE.unitType},
+//           {sensorName: SensorType.HUMIDITY.name, sensorValue: 80, sensorDataUnit: SensorType.HUMIDITY.unitType},
+//           {sensorName: SensorType.AIRQUALITY.name, sensorValue: 35, sensorDataUnit: SensorType.AIRQUALITY.unitType}]
+//       }
+//     ]
+//   }
+// ];
