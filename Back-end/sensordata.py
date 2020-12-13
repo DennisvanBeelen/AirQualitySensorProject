@@ -47,8 +47,8 @@ class Sensor:
             sensor = self.output[sensor_type]
             data = {
                 "sensorName": self.name,
-                "sensorDataUnit": sensor.unit,
-                "sensorType": sensor.name,
+                "sensorDataUnit": sensor.sensor_unit,
+                "sensorType": sensor.sensor_type,
                 "sensorValue": str(sensor.value)
             }
             sensor_data.append(data)

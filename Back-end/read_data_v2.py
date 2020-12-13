@@ -74,11 +74,9 @@ def main():
     firebase_client = set_up()
 
     while True:
-        try:
-            firebase_client.simulate_sensor_values()
-            firebase_client.send_data_to_firebase()
-        except:
-            pass
+        firebase_client.simulate_sensor_values()
+        firebase_client.send_data_to_firebase()
+
         time.sleep(2)
 
 
