@@ -32,7 +32,7 @@ class Sensor:
     def simulate_values(self):
         for sensor_type in list(self.output):
             sensor = self.output[sensor_type]
-            self.output[sensor_type].value = random.randint(sensor.simulate_min, sensor.simulate_max)
+            self.output[sensor_type].value = random.randint(sensor.sensor_min, sensor.sensor_max)
 
     def set_up(self):
         pass
