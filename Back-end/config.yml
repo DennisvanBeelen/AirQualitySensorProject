@@ -1,0 +1,5 @@
+id: 123456787
+name: Office
+location: Office
+collection: sensorData
+cert: ./serviceAccountKey.json
