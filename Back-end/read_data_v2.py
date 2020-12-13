@@ -22,18 +22,18 @@ def parse_config():
             config[config_attribute] = config_value
 
     except:
-        raise Exception("Config file was bad formatted!")
+        raise Exception("Config file was formatted wrong!")
 
 
 def check_config():
     if 'id' not in config:
-        raise Exception('No id fount in config file!')
+        raise Exception('No id found in config file!')
     elif 'name' not in config:
-        raise Exception('No name fount in config file!')
+        raise Exception('No name found in config file!')
     elif 'location' not in config:
-        raise Exception('No location fount in config file!')
+        raise Exception('No location found in config file!')
     elif 'collection' not in config:
-        raise Exception('No collection name fount in config file!')
+        raise Exception('No collection name found in config file!')
 
     elif 'cert' not in config:
         raise Exception('No path to cert found in config!')
@@ -44,10 +44,10 @@ def check_config():
 def set_up_sensors():
     print('init setup sensors')
 
-    sensors.append(sensordata.AirQualitySensor)
-    sensors.append(sensordata.Co2Sensor)
-    sensors.append(sensordata.BmpSensor)
-    sensors.append(sensordata.DhtSensor)
+    sensors.append(sensordata.AirQualitySensor())
+    sensors.append(sensordata.Co2Sensor())
+    sensors.append(sensordata.BmpSensor())
+    sensors.append(sensordata.DhtSensor())
 
     for sensor in sensors:
         sensor.set_up()

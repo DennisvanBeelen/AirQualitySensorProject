@@ -71,8 +71,8 @@ class DhtSensor(Sensor):
     def set_up(self):
         dht_device = adafruit_dht.DHT11(board.D4)
 
-        signal(SIGINT, lambda: [dht_device.exit(), exit(0)])
-        signal(SIGTERM, lambda: [dht_device.exit(), exit(0)])
+        signal(SIGINT, lambda signal, frame: [dht_device.exit(), exit(0)])
+        signal(SIGTERM, lambda signal, frame: [dht_device.exit(), exit(0)])
         self.dht_device = dht_device
 
     def calc_value(self):
