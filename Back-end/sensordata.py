@@ -43,8 +43,8 @@ class Sensor:
     def get_data(self):
         sensor_data = []
 
-        for sensor in self.output:
-            sensor.get_value()
+        for sensor_type in list(self.output):
+            sensor = self.output[sensor_type]
             data = {
                 "sensorName": self.name,
                 "sensorDataUnit": sensor.unit,
