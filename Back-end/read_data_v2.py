@@ -74,7 +74,8 @@ def main():
     firebase_client = set_up()
 
     while True:
-        firebase_client.simulate_sensor_values()
+        #firebase_client.simulate_sensor_values()
+        firebase_client.update_sensors_values()
         firebase_client.send_data_to_firebase()
 
         time.sleep(2)
