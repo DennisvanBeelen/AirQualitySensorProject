@@ -3,10 +3,8 @@ import time
 import sensordata
 import firebasedata
 
-db = any
 config = {}
 sensors = []
-firebase_client = any
 
 def parse_config():
     if not os.path.isfile('./config.yml'):
@@ -66,14 +64,14 @@ def set_up():
 
         set_up_sensors()
 
-        firebase_client = set_up_firebase()
+        return set_up_firebase()
 
     except:
         raise
 
 
 def main():
-    set_up()
+    firebase_client = set_up()
 
     while True:
         try:
