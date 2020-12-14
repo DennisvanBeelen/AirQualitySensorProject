@@ -41,6 +41,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\SoftwareEngineering\Software Projects\AirQualitySensorProject\Front-end\AirQualityDashboard\src\app\services" />
       <recent name="D:\SoftwareEngineering\Software Projects\AirQualitySensorProject\Front-end\AirQualityDashboard\src\app" />
     </key>
   </component>
@@ -64,6 +65,8 @@
       <workItem from="1606739462085" duration="1022000" />
       <workItem from="1607071812936" duration="11580000" />
       <workItem from="1607432007364" duration="10395000" />
+      <workItem from="1607679020714" duration="1789000" />
+      <workItem from="1607940611687" duration="18023000" />
     </task>
     <servers />
   </component>
@@ -71,6 +74,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1607959932656">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1607959932656" />
     <state x="629" y="298" key="EditFileWatcherDialog" timestamp="1606481428458">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

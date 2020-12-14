@@ -1,18 +1,41 @@
 <mat-dialog-content>
   <div *ngIf="data.sensorData !== undefined">
-    <h1 class="popup-location">Location:  {{data.location}}</h1>
-    <h4 class="popup-id-and-time">Id:        {{data.id}}</h4>
-    <h4 class="popup-id-and-time">Timestamp: {{createReadableTimestamp(data.timestamp)}}</h4>
+    <h1 class="popup-location">Location: {{data.location}}</h1>
+    <h4 class="popup-id-and-time">Id: {{data.id}}</h4>
+    <h4 class="popup-id-and-time">
+      Last update is
+      from: {{dataServ.createReadableTimestamp(dataServ.getMostRecentSensorReading(data.sensorData).timestamp)}}</h4>
 
     <mat-divider class="popup-devider"></mat-divider>
 
-    <div *ngFor="let sensor of data.sensorData; let i = index" class="sensorDataText" (click)="sensorClicked(sensor)">
-      <h3 class="popup-sensor">{{sensor.sensorName}}
-        : {{sensor.sensorValue}}{{sensor.sensorDataUnit}}
-        <mat-icon class="safety_icon"
-                  [ngStyle]="{'color': data.safetyColor[i]}">{{data.safetyRating[i]}}</mat-icon>
-      </h3>
-    </div>
 
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 popup-table" matSort>
+
+      <ng-container matColumnDef="timestamp">
+        <th mat-header-cell *matHeaderCellDef class="mediumCell" mat-sort-header> Timestamp</th>
+        <td mat-cell
+            *matCellDef="let element">
+          <div>{{dataServ.createReadableTimestamp(element.timestamp)}}</div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sensorData">
+        <th mat-header-cell *matHeaderCellDef class=""> Sensor data</th>
+        <td mat-cell *matCellDef="let element" style="display: flex; flex-wrap: wrap;">
+          <mat-list *ngIf="element.data !== undefined">
+            <button mat-raised-button disabled *ngFor="let sensorReadings of element.data"
+                    class="sensorDataStyling">{{sensorReadings.sensorName}}
+              : {{dataServ.roundSensorData(sensorReadings.sensorValue)}} {{sensorReadings.sensorDataUnit}}
+              <mat-icon class="safety_icon"
+                        [ngStyle]="{'color': dataServ.getSafetyColorCode(dataServ.getSafetyRating(sensorReadings.sensorType, sensorReadings.sensorValue))}">{{dataServ.getSafetyRating(sensorReadings.sensorType, sensorReadings.sensorValue)}}</mat-icon>
+            </button>
+          </mat-list>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let sensorRowData; let i = index; columns: columnsToDisplay;" class="unitRow"
+          (click)="openPopup(sensorRowData)"></tr>
+    </table>
   </div>
 </mat-dialog-content>

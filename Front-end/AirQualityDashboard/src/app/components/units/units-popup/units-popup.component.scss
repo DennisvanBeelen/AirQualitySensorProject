@@ -11,6 +11,10 @@
 
 }
 
+.popup-table{
+  width: 750px;
+}
+
 
 .popup-devider{
   margin-top: 15px;
@@ -22,5 +26,21 @@
 }
 
 .sensorDataText{
+  cursor: pointer;
+}
+
+.smallCell {
+  width: 100px;
+}
+
+.mediumCell {
+  width: 100px;
+}
+
+
+.sensorDataStyling {
+  margin: 2px;
+  display: inline;
+  color: black !important;
   cursor: pointer;
 }
