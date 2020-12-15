@@ -29,14 +29,31 @@
   <ng-container *ngIf="!compactMode" matColumnDef="sensorData">
     <th mat-header-cell *matHeaderCellDef class=""> Sensor data</th>
     <td mat-cell *matCellDef="let element" style="display: flex; flex-wrap: wrap;">
-      <mat-list *ngIf="element.payload.doc.data().sensorData !== undefined">
+      <mat-list *ngIf="element.payload.doc.data().sensorData !== undefined" class="sensorDataContainer">
         <button mat-raised-button
+                class="sensorDataButton"
                 [ngStyle]="{'background-color': dataServ.getSafetyColorCode(dataServ.getSafetyRating(sensorReadings.sensorType, sensorReadings.sensorValue))}"
-                *ngFor="let sensorReadings of dataServ.getMostRecentSensorReading(element.payload.doc.data().sensorData).data"
-                class="sensorDataStyling">{{sensorReadings.sensorName}}
-          : {{dataServ.roundSensorData(sensorReadings.sensorValue)}} {{sensorReadings.sensorDataUnit}}
-          <mat-icon
-            class="safety_icon">{{dataServ.getSafetyRating(sensorReadings.sensorType, sensorReadings.sensorValue)}}</mat-icon>
+                *ngFor="let sensorReadings of dataServ.getMostRecentSensorReading(element.payload.doc.data().sensorData).data">
+          <div class="sensorDataStyling">{{sensorReadings.sensorName}}
+            : {{dataServ.roundSensorData(sensorReadings.sensorValue)}} {{sensorReadings.sensorDataUnit}}
+
+            <div class="safety-scale-container"> <!--              !!! This is the scale !!!                  -->
+              <div class="safety-scale-red">
+                <div class="safety-scale-yellow">
+                  <div class="safety-scale-green">
+
+                  </div>
+                </div>
+              </div>
+              <div class="safety-scale-CorrectValues">
+                <div class="safety-scale-CorrectValues-value-left">900</div>
+                <div class="safety-scale-CorrectValues-value-right">1000</div>
+                <div class="safety-scale-Pointer"></div>
+
+              </div>
+            </div>
+
+          </div>
         </button>
       </mat-list>
     </td>

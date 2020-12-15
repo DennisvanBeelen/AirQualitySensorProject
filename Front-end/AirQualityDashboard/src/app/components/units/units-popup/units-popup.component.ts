@@ -6,13 +6,12 @@ import {SensorType} from "../../../interfaces";
 import {dataService} from "../../../services/dataService";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
-import {ChangeDetectorRef } from '@angular/core';
-
+import {ChangeDetectorRef} from '@angular/core';
 
 
 @Component({
   selector: 'app-units-popup',
-  providers: [ dataService],
+  providers: [dataService],
   templateUrl: './units-popup.component.html',
   styleUrls: ['./units-popup.component.scss']
 })
@@ -20,12 +19,11 @@ export class UnitsPopupComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, public dataServ: dataService,private cdref: ChangeDetectorRef) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, public dataServ: dataService, private cdref: ChangeDetectorRef) {
   }
+
   dataSource;
   columnsToDisplay = ['timestamp', 'sensorData'];
-
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.dataServ.createArrayFromObject(this.data.sensorData));
@@ -42,7 +40,7 @@ export class UnitsPopupComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
-    this.sort.sort({id:'timestamp', start: 'desc', disableClear: false});
+    this.sort.sort({id: 'timestamp', start: 'desc', disableClear: false});
     this.cdref.detectChanges();
   }
 }

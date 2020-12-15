@@ -33,13 +33,13 @@ export class dataService {
   getSafetyColorCode(safetyRating: string) {
     switch (safetyRating) {
       case "mood":
-        return "#03EA18"
+        return "#80ff97"
 
       case "sentiment_dissatisfied":
-        return "#fbbe00"
+        return "#fbff80"
 
       case "mood_bad":
-        return "#ff0000"
+        return "#ff6666"
     }
   }
 

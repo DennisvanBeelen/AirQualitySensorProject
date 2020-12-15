@@ -14,20 +14,17 @@ table {
   width: 100px;
 }
 
-.bigCell {
-
+.sensorDataButton{
+  margin: 2px;
+  height: 42px;
 }
 
 .sensorDataStyling {
-  margin: 2px;
-  display: inline;
+  display: flex !important;
   color: black !important;
   cursor: default;
 }
 
-.safety_icon {
-  vertical-align: middle;
-}
 
 .unitRow {
   cursor: pointer;
@@ -36,5 +33,79 @@ table {
 .fullWidth {
   width: 100%;
   display: flex;
+}
+
+.sensorDataContainer{
+  padding: 8px 0;
+}
+
+.sensorDataButton{
+  margin: 2px;
+  height: 42px;
+}
+
+.safety-scale-container {
+  margin: 0px 0 2.5px 5px;
+  //background-color: blue;
+  width: 100px;
+  height: 30px;
+}
+
+.safety-scale-red{
+  margin: 5px 0 10px 0;
+  background-color: red;
+  width: 100px;
+  height: 15px;
+  box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
+}
+.safety-scale-yellow{
+  margin: 5px 15px 10px 15px;
+  background-color: yellow;
+  width: 70px;
+  height: 15px;
+  box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
+}
+.safety-scale-green{
+  margin: 5px 10px 10px 10px;
+  background-color: green;
+  width: 50px;
+  height: 15px;
+  box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
+}
+
+.safety-scale-CorrectValues{
+  background: rgba(0,0,0,0);
+  width: 50px;
+  height: 20px;
+  box-shadow: inset -2px 0 0 black, inset 0 0 0 black, inset 2px 0 0 black, inset 0 0 0 black;
+  position: relative;
+  top: -25px;
+  left: 25px;
+}
+
+.safety-scale-CorrectValues-value-left{
+  width: 50px;
+  height: 10px;
+  position: relative;
+  top: 8px;
+  left: -25px;
+}
+
+.safety-scale-CorrectValues-value-right{
+  width: 50px;
+  height: 10px;
+  position: relative;
+  top: -2px;
+  left: 25px;
+}
+
+.safety-scale-Pointer{
+  background: rgba(0,0,0,0.7);
+  width: 3px;
+  height: 20px;
+  box-shadow: inset 0px 0 0 white, inset 0 0 0 black, inset 3px 0 0 darkblue, inset 0 0 0 black;
+  position: relative;
+  top: -25px;
+  left: 25px;
 }
 
