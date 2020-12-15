@@ -19,15 +19,22 @@ table {
 }
 
 .sensorDataStyling {
-  margin: 10px 7px 0 7px;
+  margin: 2px;
+  display: inline;
+  color: black !important;
+  cursor: default;
 }
 
-.safety_icon{
+.safety_icon {
   vertical-align: middle;
 }
 
-.unitRow{
+.unitRow {
   cursor: pointer;
 }
 
+.fullWidth {
+  width: 100%;
+  display: flex;
+}
 

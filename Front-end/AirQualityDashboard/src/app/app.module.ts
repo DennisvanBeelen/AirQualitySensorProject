@@ -29,6 +29,9 @@ import {InformationDisplayComponent} from './components/information/information-
 import {MatCardModule} from "@angular/material/card";
 import {InformationPopupComponent} from './components/information/information-popup/information-popup.component';
 import {MatGridListModule} from "@angular/material/grid-list";
+import {MatSortModule} from "@angular/material/sort";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -60,7 +63,10 @@ import {MatGridListModule} from "@angular/material/grid-list";
     MatDividerModule,
     MatIconModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSortModule,
+    MatChipsModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent],

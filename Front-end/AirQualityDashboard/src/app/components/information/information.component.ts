@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {airQualityInformationObject, SensorType} from "../../interfaces";
-import {firebaseService} from "../../firebaseService";
+import {firebaseService} from "../../services/firebaseService";
 
 @Component({
   selector: 'app-information',
@@ -9,7 +9,7 @@ import {firebaseService} from "../../firebaseService";
   styleUrls: ['./information.component.scss']
 })
 export class InformationComponent implements OnInit {
-  ST = [SensorType.BAROMETER, SensorType.AIRQUALITY, SensorType.HUMIDITY, SensorType.TEMPERATURE, SensorType.ALTIMETER]
+  ST = [SensorType.PRESSURE, SensorType.AIRQUALITY, SensorType.HUMIDITY, SensorType.TEMPERATURE, SensorType.ALTITUDE, SensorType.CO2]
   informationData;
   infoData;
 

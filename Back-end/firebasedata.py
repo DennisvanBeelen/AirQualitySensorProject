@@ -48,6 +48,7 @@ class FirebaseClient:
         return sensor_array
 
     def get_data_as_dict(self):
+        self.timestamp = str(datetime.now().replace(microsecond=0))
         firebase_data = {
             "sensorData": {
                 "id": self.id,

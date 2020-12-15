@@ -40,9 +40,10 @@ export interface informationFormat{
 }
 
 export const SensorType = {
-  BAROMETER: {
+  PRESSURE: {
     name: 'Barometer',
-    unitType: ' bar',
+    type: 'pressure',
+    unitType: ' hpa',
     minimalValue: 1,
     maximumValue: 2,
     infoLink: "https://www.wikipedia.org",
@@ -50,14 +51,16 @@ export const SensorType = {
   },
   TEMPERATURE: {
     name: 'Temperature',
+    type: 'temperature',
     unitType: '°',
     minimalValue: 10,
     maximumValue: 30,
     infoLink: "https://www.wikipedia.org",
     sensorInfo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   },
-  ALTIMETER: {
-    name: 'Altimeter',
+  ALTITUDE: {
+    name: 'Altitude',
+    type: 'altitude',
     unitType: ' meter',
     minimalValue: -5,
     maximumValue: 30,
@@ -66,6 +69,7 @@ export const SensorType = {
   },
   AIRQUALITY: {
     name: 'Air quality',
+    type: 'Air quality',
     unitType: '%',
     minimalValue: 70,
     maximumValue: 100,
@@ -73,10 +77,20 @@ export const SensorType = {
     sensorInfo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   },
   HUMIDITY: {
-    name: 'humidity',
+    name: 'Humidity',
+    type: 'humidity',
     unitType: '%',
     minimalValue: 25,
     maximumValue: 75,
+    infoLink: "https://www.wikipedia.org",
+    sensorInfo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+  CO2: {
+    name: 'Co2',
+    type: 'co2',
+    unitType: 'ppm',
+    minimalValue: 15,
+    maximumValue: 45,
     infoLink: "https://www.wikipedia.org",
     sensorInfo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   },

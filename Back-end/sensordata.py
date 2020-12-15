@@ -105,7 +105,6 @@ class BmpSensor(Sensor):
         self.barometer = adafruit_bmp280.Adafruit_BMP280_I2C(i2c)
 
     def calc_value(self):
-        print('bmp calc value')
         self.output["temperature"].value = self.barometer.temperature
         self.output["pressure"].value = self.barometer.pressure
         self.output["altitude"].value = self.barometer.altitude
