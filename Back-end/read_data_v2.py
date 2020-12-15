@@ -6,6 +6,7 @@ import firebasedata
 config = {}
 sensors = []
 
+
 def parse_config():
     if not os.path.isfile('./config.yml'):
         raise Exception('No config file found')
