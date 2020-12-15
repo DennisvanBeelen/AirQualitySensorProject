@@ -57,8 +57,8 @@ export class dataService {
 
   getCorrectSensorType(sensorName) {
     switch (sensorName.toLowerCase()) {
-      case SensorType.BAROMETER.type.toLowerCase():
-        return SensorType.BAROMETER;
+      case SensorType.PRESSURE.type.toLowerCase():
+        return SensorType.PRESSURE;
 
       case SensorType.ALTITUDE.type.toLowerCase():
         return SensorType.ALTITUDE;
@@ -76,6 +76,7 @@ export class dataService {
         return SensorType.CO2;
     }
   }
+
 
   roundSensorData(sensorValue) {
     return Math.round((Number(sensorValue) + Number.EPSILON) * 100) / 100

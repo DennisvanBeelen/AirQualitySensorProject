@@ -40,10 +40,10 @@ export interface informationFormat{
 }
 
 export const SensorType = {
-  BAROMETER: {
+  PRESSURE: {
     name: 'Barometer',
     type: 'pressure',
-    unitType: ' bar',
+    unitType: ' hpa',
     minimalValue: 1,
     maximumValue: 2,
     infoLink: "https://www.wikipedia.org",

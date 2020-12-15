@@ -6,6 +6,8 @@ import {SensorType} from "../../../interfaces";
 import {dataService} from "../../../services/dataService";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
+import {ChangeDetectorRef } from '@angular/core';
+
 
 
 @Component({
@@ -19,7 +21,7 @@ export class UnitsPopupComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, public dataServ: dataService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, public dataServ: dataService,private cdref: ChangeDetectorRef) {
   }
   dataSource;
   columnsToDisplay = ['timestamp', 'sensorData'];
@@ -30,7 +32,8 @@ export class UnitsPopupComponent implements OnInit, AfterViewInit {
   }
 
   sensorClicked(sensor: any) {
-    this.openPopup(SensorType[sensor.sensorName.toUpperCase().replace(' ', '')])
+    console.log(sensor.sensorType.toUpperCase().replace(' ', ''))
+    this.openPopup(SensorType[sensor.sensorType.toUpperCase().replace(' ', '')])
   }
 
   openPopup(sensorRowData) {
@@ -39,5 +42,7 @@ export class UnitsPopupComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
+    this.sort.sort({id:'timestamp', start: 'desc', disableClear: false});
+    this.cdref.detectChanges();
   }
 }
