@@ -35,7 +35,7 @@ class FirebaseClient:
         return self.collection
 
     def get_document(self):
-        document = self.name + self.id + 'test'
+        document = self.name + self.id
         return document
 
     def get_sensor_data_array(self):
@@ -51,6 +51,8 @@ class FirebaseClient:
         self.timestamp = str(datetime.now().replace(microsecond=0))
         firebase_data = {
             "sensorData": {
+                "id": self.id,
+                "location": self.location,
                 self.timestamp: {
                     "data": self.get_sensor_data_array(),
                     "timestamp": firestore.SERVER_TIMESTAMP
