@@ -30,28 +30,46 @@ export class dataService {
     return new Date(timestamp.seconds * 1000).toLocaleString();
   }
 
-  getSafetyColorCode(safetyRating: string) {
-    switch (safetyRating) {
-      case "mood":
-        return "#80ff97"
+  getSafetyColorCode(sensorName, sensorValue) {
 
-      case "sentiment_dissatisfied":
-        return "#fbff80"
+    let sensor = this.getCorrectSensorType(sensorName);
 
-      case "mood_bad":
-        return "#ff6666"
+    if (sensorValue < sensor.maximumValue && sensorValue > sensor.minimalValue) {
+      return "#80ff97"
+    } else if (sensorValue < (sensor.maximumValue + (sensor.maximumValue * this.extraAllowance)) && sensorValue > (sensor.minimalValue - (sensor.minimalValue * this.extraAllowance))) {
+      return "#fbff80"
+    } else {
+      return "#ff6666"
     }
   }
 
   getSafetyRating(sensorName, sensorValue) {
     let sensor = this.getCorrectSensorType(sensorName);
+    let betweenMinAndMax = sensor.maximumValue - sensor.minimalValue;
+    let stepsBetween = betweenMinAndMax/5;
+    let offset = 0;
 
     if (sensorValue < sensor.maximumValue && sensorValue > sensor.minimalValue) {
-      return "mood"; // mood is happy smiley
+      // good
+      if (sensorValue > sensor.maximumValue - (stepsBetween)){ return (45-offset)+ "px"}
+      else if (sensorValue > sensor.maximumValue - (stepsBetween*2)){ return (35-offset)+"px"}
+      else if (sensorValue < sensor.minimalValue + (stepsBetween)){ return (5-offset)+"px"}
+      else if (sensorValue < sensor.minimalValue + (stepsBetween)){ return (15-offset)+"px"}
+      else {return (25-offset)+"px";} // dead center
     } else if (sensorValue < (sensor.maximumValue + (sensor.maximumValue * this.extraAllowance)) && sensorValue > (sensor.minimalValue - (sensor.minimalValue * this.extraAllowance))) {
-      return "sentiment_dissatisfied"; // sentiment_dissatisfied is not super happy smiley
+      // medium
+      if (sensorValue < sensor.minimalValue) {
+        return (-5-offset)+"px"; // left yellow
+      } else {
+        return (54-offset)+"px"; // right yellow
+      }
     } else {
-      return "mood_bad"; // sad smiley
+      // bad
+      if (sensorValue > (sensor.maximumValue + (sensor.maximumValue * this.extraAllowance))) {
+        return (70-offset)+ "px";
+      } else {
+        return (-20-offset)+"px";
+      }
     }
   }
 

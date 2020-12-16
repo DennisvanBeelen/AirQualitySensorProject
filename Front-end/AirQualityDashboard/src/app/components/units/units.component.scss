@@ -53,21 +53,21 @@ table {
 
 .safety-scale-red{
   margin: 5px 0 10px 0;
-  background-color: red;
+  background-color: #ff3b3b;
   width: 100px;
   height: 15px;
   box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
 }
 .safety-scale-yellow{
   margin: 5px 15px 10px 15px;
-  background-color: yellow;
+  background-color: #f9ff4a;
   width: 70px;
   height: 15px;
   box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
 }
 .safety-scale-green{
   margin: 5px 10px 10px 10px;
-  background-color: green;
+  background-color: #42ff65;
   width: 50px;
   height: 15px;
   box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
@@ -87,7 +87,7 @@ table {
   width: 50px;
   height: 10px;
   position: relative;
-  top: 8px;
+  top: 10px;
   left: -25px;
 }
 
@@ -95,17 +95,17 @@ table {
   width: 50px;
   height: 10px;
   position: relative;
-  top: -2px;
+  top: 0px;
   left: 25px;
 }
 
 .safety-scale-Pointer{
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0);
   width: 3px;
-  height: 20px;
-  box-shadow: inset 0px 0 0 white, inset 0 0 0 black, inset 3px 0 0 darkblue, inset 0 0 0 black;
+  height: 16px;
+  box-shadow: inset 0px 0 0 white, inset 0 0 0 black, inset 2px 0 0 #0004ff, inset 0 0 0 black;
   position: relative;
   top: -25px;
-  left: 25px;
 }
+
 

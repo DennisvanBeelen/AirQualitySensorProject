@@ -54,19 +54,8 @@ export class UnitsComponent implements OnInit {
   }
 
   openPopup(sensorRowData) {
-    sensorRowData = this.addSafetyDataToDialogData(sensorRowData);
+    sensorRowData = sensorRowData.payload.doc.data();
     this.dialog.open(UnitsPopupComponent, {data: sensorRowData});
   }
 
-  addSafetyDataToDialogData(sensorRowData) {
-    sensorRowData = sensorRowData.payload.doc.data();
-    for (let sensorData of this.dataServ.createArrayFromObject(sensorRowData.sensorData)){
-      for (let sensor of sensorData.data) {
-        let sr = this.dataServ.getSafetyRating(sensor.sensorType, sensor.sensorValue);
-        sensor.safetyRating = sr;
-        sensor.safetyColor = this.dataServ.getSafetyColorCode(sr);
-      }
-    }
-    return sensorRowData;
-  }
 }

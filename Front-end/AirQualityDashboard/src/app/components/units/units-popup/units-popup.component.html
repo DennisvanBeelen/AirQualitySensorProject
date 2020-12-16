@@ -23,11 +23,29 @@
         <th mat-header-cell *matHeaderCellDef class=""> Sensor data</th>
         <td mat-cell *matCellDef="let element" style="display: flex; flex-wrap: wrap;">
           <mat-list *ngIf="element.data !== undefined" class="sensorDataContainer">
-            <button mat-raised-button *ngFor="let sensorReadings of element.data"
-                    [ngStyle]="{'background-color': dataServ.getSafetyColorCode(dataServ.getSafetyRating(sensorReadings.sensorType, sensorReadings.sensorValue))}"
-                    class="sensorDataStyling" (click)="sensorClicked(sensorReadings)">{{sensorReadings.sensorName}}
-              : {{dataServ.roundSensorData(sensorReadings.sensorValue)}} {{sensorReadings.sensorDataUnit}}
-              <mat-icon class="safety_icon">{{dataServ.getSafetyRating(sensorReadings.sensorType, sensorReadings.sensorValue)}}</mat-icon>
+            <button mat-raised-button
+                    class="sensorDataButton"
+                    [ngStyle]="{'background-color': dataServ.getSafetyColorCode(sensorReadings.sensorType, sensorReadings.sensorValue)}"
+                    *ngFor="let sensorReadings of element.data"
+                    (click)="sensorClicked(sensorReadings)">
+              <div class="sensorDataStyling">{{sensorReadings.sensorName}}
+                : {{dataServ.roundSensorData(sensorReadings.sensorValue)}} {{sensorReadings.sensorDataUnit}}
+
+                <div class="safety-scale-container"> <!--              !!! This is the scale !!!                  -->
+                  <div class="safety-scale-red">
+                    <div class="safety-scale-yellow">
+                      <div class="safety-scale-green">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="safety-scale-CorrectValues">
+                    <div class="safety-scale-CorrectValues-value-left">{{dataServ.getCorrectSensorType(sensorReadings.sensorType).minimalValue}}</div>
+                    <div class="safety-scale-CorrectValues-value-right">{{dataServ.getCorrectSensorType(sensorReadings.sensorType).maximumValue}}</div>
+                    <div class="safety-scale-Pointer" [ngStyle]="{'left': dataServ.getSafetyRating(sensorReadings.sensorType, sensorReadings.sensorValue)}"></div>
+                    <div class="safety-scale-Pointer-top" [ngStyle]="{'left': dataServ.getSafetyRating(sensorReadings.sensorType, sensorReadings.sensorValue)}"></div>
+                  </div>
+                </div>
+              </div>
             </button>
           </mat-list>
         </td>
