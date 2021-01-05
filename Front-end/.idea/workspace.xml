@@ -27,7 +27,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../website_dvbeelen_vueJs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -69,6 +69,10 @@
       <workItem from="1607940611687" duration="18023000" />
       <workItem from="1608024131818" duration="11749000" />
       <workItem from="1608110691691" duration="7451000" />
+      <workItem from="1609411547996" duration="21000" />
+      <workItem from="1609839253435" duration="484000" />
+      <workItem from="1609839758185" duration="16000" />
+      <workItem from="1609839782908" duration="4739000" />
     </task>
     <servers />
   </component>
@@ -84,10 +88,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="629" y="298" key="EditFileWatcherDialog/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1606481428458" />
-    <state x="423" y="309" key="FileChooserDialogImpl" timestamp="1605954150740">
+    <state x="423" y="309" key="FileChooserDialogImpl" timestamp="1609411564850">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="423" y="309" key="FileChooserDialogImpl/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1605954150740" />
+    <state x="423" y="309" key="FileChooserDialogImpl/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1609411564850" />
     <state x="423" y="309" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1605614837585" />
     <state x="0" y="168" key="SettingsEditor" timestamp="1606128920869">
       <screen x="0" y="0" width="1920" height="1040" />
