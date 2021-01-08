@@ -32,6 +32,8 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {MatSortModule} from "@angular/material/sort";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatListModule} from "@angular/material/list";
+import { StatTestComponent } from './components/statistics/individualStatistics/stat-test/stat-test.component';
+import {ChartModule} from "angular2-chartjs";
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import {MatListModule} from "@angular/material/list";
     PageNotFoundComponent,
     UnitsPopupComponent,
     InformationDisplayComponent,
-    InformationPopupComponent
+    InformationPopupComponent,
+    StatTestComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -66,7 +69,8 @@ import {MatListModule} from "@angular/material/list";
     MatGridListModule,
     MatSortModule,
     MatChipsModule,
-    MatListModule
+    MatListModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent],

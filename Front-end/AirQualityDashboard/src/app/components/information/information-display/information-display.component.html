@@ -15,8 +15,8 @@
     <h1>{{informationData.information.title}}</h1>
     <a href="{{informationData.information.infoLink}}">more information</a>
     <div *ngFor="let info of informationData.information.information" style="white-space: pre-line;">
-      <h3>{{info.header}}</h3>
-      <p>{{info.info}}</p>
+      <h2 class="infoHeader">{{info.header}}</h2>
+      <p class="infoText">{{info.info}}</p>
     </div>
 
   </ng-template>

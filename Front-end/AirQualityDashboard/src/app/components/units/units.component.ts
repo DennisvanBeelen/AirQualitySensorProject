@@ -47,7 +47,6 @@ export class UnitsComponent implements OnInit {
     this.firebaseServ.getLiveCollectionFromFirebase(this.sensorDataCollectioPath).subscribe(data => (this.dataSource = new MatTableDataSource(data)));
   }
 
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
