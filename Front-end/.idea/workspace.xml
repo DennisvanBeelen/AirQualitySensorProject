@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2b14b4fc-529f-4b6e-b773-743e94849c6c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/information/information-display/information-display.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/information/information-display/information-display.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/information/information-display/information-display.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/information/information-display/information-display.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/information/information.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/information/information.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/information/information.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/information/information.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/units/units.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/units/units.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="2b14b4fc-529f-4b6e-b773-743e94849c6c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -99,6 +87,7 @@
       <workItem from="1610024261905" duration="2967000" />
       <workItem from="1610101168892" duration="2733000" />
       <workItem from="1610109825347" duration="4285000" />
+      <workItem from="1610354971587" duration="341000" />
     </task>
     <servers />
   </component>

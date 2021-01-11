@@ -31,9 +31,8 @@ export class StatTestComponent implements OnInit {
   }
 
   test() {
-    console.log(this.sensorData[0].sensorData);
     this.sensorData[0].sensorData = this.sortArrayOnTimestamp(this.sensorData[0].sensorData);
-    console.log(this.sensorData[0].sensorData);
+
     for (let i = 0; i<this.sensorData[0].sensorData.length ;i++){
       this.data.labels.push(this.dataService.createReadableTimestamp(this.sensorData[0].sensorData[i].timestamp)); // readable timestamp
       this.data.datasets[0].data.push(this.sensorData[0].sensorData[i].data[1].sensorValue); // Co2 value
