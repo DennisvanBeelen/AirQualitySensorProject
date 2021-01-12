@@ -33,4 +33,8 @@ export class StatisticsComponent implements OnInit {
     }
     return newData
   }
+
+  CL() {
+    console.log(this.sensorData);
+  }
 }

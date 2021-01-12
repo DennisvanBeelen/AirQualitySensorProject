@@ -34,6 +34,7 @@ import {MatChipsModule} from "@angular/material/chips";
 import {MatListModule} from "@angular/material/list";
 import { StatTestComponent } from './components/statistics/individualStatistics/stat-test/stat-test.component';
 import {ChartModule} from "angular2-chartjs";
+import { LineGraphOfOneSensorComponent } from './components/statistics/individualStatistics/line-graph-of-one-sensor/line-graph-of-one-sensor.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {ChartModule} from "angular2-chartjs";
     UnitsPopupComponent,
     InformationDisplayComponent,
     InformationPopupComponent,
-    StatTestComponent
+    StatTestComponent,
+    LineGraphOfOneSensorComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

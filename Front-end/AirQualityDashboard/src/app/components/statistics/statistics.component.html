@@ -1,2 +1,10 @@
+<button (click)="CL()">console log data.</button>
 
-<app-stat-test *ngIf="sensorData" [sensorData]="sensorData"></app-stat-test>
+
+<app-line-graph-of-one-sensor *ngIf="sensorData" [sensorData]="sensorData" [currentSensorUnit]="1" [currentSensor]="1"></app-line-graph-of-one-sensor>
+<app-line-graph-of-one-sensor *ngIf="sensorData" [sensorData]="sensorData" [currentSensorUnit]="1" [currentSensor]="0"></app-line-graph-of-one-sensor>
+<app-line-graph-of-one-sensor *ngIf="sensorData" [sensorData]="sensorData" [currentSensorUnit]="1" [currentSensor]="6"></app-line-graph-of-one-sensor>
+<app-line-graph-of-one-sensor *ngIf="sensorData" [sensorData]="sensorData" [currentSensorUnit]="1" [currentSensor]="2"></app-line-graph-of-one-sensor>
+<app-line-graph-of-one-sensor *ngIf="sensorData" [sensorData]="sensorData" [currentSensorUnit]="1" [currentSensor]="3"></app-line-graph-of-one-sensor>
+<app-line-graph-of-one-sensor *ngIf="sensorData" [sensorData]="sensorData" [currentSensorUnit]="1" [currentSensor]="4"></app-line-graph-of-one-sensor>
+<app-line-graph-of-one-sensor *ngIf="sensorData" [sensorData]="sensorData" [currentSensorUnit]="1" [currentSensor]="5"></app-line-graph-of-one-sensor>
