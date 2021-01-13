@@ -34,6 +34,8 @@ import {MatChipsModule} from "@angular/material/chips";
 import {MatListModule} from "@angular/material/list";
 import { StatTestComponent } from './components/statistics/individualStatistics/stat-test/stat-test.component';
 import {ChartModule} from "angular2-chartjs";
+import { GaugeComponent } from './components/statistics/individualStatistics/gauge/gauge.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -47,31 +49,33 @@ import {ChartModule} from "angular2-chartjs";
     UnitsPopupComponent,
     InformationDisplayComponent,
     InformationPopupComponent,
-    StatTestComponent
+    StatTestComponent,
+    GaugeComponent
   ],
-  imports: [
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatInputModule,
-    CommonModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatIconModule,
-    MatCardModule,
-    MatGridListModule,
-    MatSortModule,
-    MatChipsModule,
-    MatListModule,
-    ChartModule
-  ],
+    imports: [
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFirestoreModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatTableModule,
+        MatFormFieldModule,
+        MatInputModule,
+        CommonModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatIconModule,
+        MatCardModule,
+        MatGridListModule,
+        MatSortModule,
+        MatChipsModule,
+        MatListModule,
+        ChartModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent],
   exports: []
