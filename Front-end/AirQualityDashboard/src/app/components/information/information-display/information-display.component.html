@@ -8,12 +8,12 @@
 
     <h3>information:</h3>
     <p style="white-space: pre-line;">{{informationData.sensor.sensorInfo}}</p>
-    <a href="{{informationData.sensor.infoLink}}">more information</a>
+    <a href="{{informationData.sensor.infoLink}}" target="_blank">more information</a>
   </div>
 
   <ng-template #notSensorInfoBlock>
     <h1>{{informationData.information.title}}</h1>
-    <a href="{{informationData.information.infoLink}}">more information</a>
+    <a href="{{informationData.information.infoLink}}" target="_blank">more information</a>
     <div *ngFor="let info of informationData.information.information" style="white-space: pre-line;">
       <h2 class="infoHeader">{{info.header}}</h2>
       <p class="infoText">{{info.info}}</p>

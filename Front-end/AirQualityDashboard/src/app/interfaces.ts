@@ -67,11 +67,12 @@ export const SensorType = {
     type: 'altitude',
     unitType: ' meter',
     minimalValue: -5,
-    maximumValue: 100,
+    maximumValue: 300,
     infoLink: "https://en.wikipedia.org/wiki/Effects_of_high_altitude_on_humans",
     sensorInfo: "Over 8000 feet you can start getting serious health issues if you stay at that altitude for a long time without training. " +
       "Other then that if you are not too far underground and get enough sunlight altitude is mostly fine. " +
-      "There is no skyscraper in the netherlands high enough that would make the air TOO thin."
+      "There is no skyscraper in the netherlands high enough that would make the air TOO thin.\n"+
+      "Going to low for too long is also unhealthy due to the lack of sun and a higher air pressure. "
   },
   AIRQUALITY: {
     name: 'Air quality',
@@ -86,7 +87,7 @@ export const SensorType = {
     name: 'Humidity',
     type: 'humidity',
     unitType: '%',
-    minimalValue: 45,
+    minimalValue: 30,
     maximumValue: 50,
     infoLink: "https://www.lennox.com/lennox-life/comfort-matters/getting-comfortable/three-signs-your-home-has-poor-indoor-humidity#:~:text=The%20ideal%20relative%20humidity%20for,of%20moisture%20it%20can%20contain.",
     sensorInfo: "According to the Mayo Clinic a healthy and comfortable humidity indoors is between 30-50%.\n\n" +
@@ -99,7 +100,7 @@ export const SensorType = {
     name: 'Co2',
     type: 'co2',
     unitType: 'ppm',
-    minimalValue: 0.250,
+    minimalValue: 0,
     maximumValue: 2,
     infoLink: "https://www.dhs.wisconsin.gov/chemical/carbondioxide.htm#:~:text=The%20levels%20of%20CO2%20in,(normal)%20outdoor%20air%20level.&text=1%2C000%20%2D%202%2C000%20ppm%3A%20level%20associated,stagnant%2C%20stale%2C%20stuffy%20air.",
     sensorInfo: "CO2 is the fourth most abundant gas in the earth's atmosphere. At room temperature, carbon dioxide (CO2) is a colorless, odorless, non-flammable gas, at other temperatures and pressures, carbon dioxide can be a liquid or a solid. \n\n" +

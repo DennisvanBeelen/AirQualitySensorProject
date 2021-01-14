@@ -1,1 +1,35 @@
-<app-stat-test *ngIf="sensorData" [sensorData]="sensorData"></app-stat-test>
+<mat-tab-group mat-align-tabs="center" *ngIf="sensorData" (selectedTabChange)="unitSelected($event)"  animationDuration="400ms">
+  <mat-tab *ngFor="let unit of sensorData; let i = index"
+           class="selectionButtons"
+           label="id: {{unit.id}}">
+    <div *ngIf="sensorData && selectedUnit.index !== null">
+      <h2 class="location">Unit location: {{selectedUnit.location}}</h2>
+      <h2 class="id">Unit id: {{selectedUnit.id}}</h2>
+
+      <!--  TODO: WESSEL ZIJN METERS HIERO!!!!!-->
+
+      <app-line-graph-of-one-sensor [sensorData]="sensorData"
+                                    [currentSensorUnit]="selectedUnit.index"
+                                    [currentSensor]="1"></app-line-graph-of-one-sensor>
+      <app-line-graph-of-one-sensor [sensorData]="sensorData"
+                                    [currentSensorUnit]="selectedUnit.index"
+                                    [currentSensor]="0"></app-line-graph-of-one-sensor>
+      <app-line-graph-of-one-sensor [sensorData]="sensorData"
+                                    [currentSensorUnit]="selectedUnit.index"
+                                    [currentSensor]="6"></app-line-graph-of-one-sensor>
+      <app-line-graph-of-one-sensor [sensorData]="sensorData"
+                                    [currentSensorUnit]="selectedUnit.index"
+                                    [currentSensor]="2"></app-line-graph-of-one-sensor>
+      <app-line-graph-of-one-sensor [sensorData]="sensorData"
+                                    [currentSensorUnit]="selectedUnit.index"
+                                    [currentSensor]="3"></app-line-graph-of-one-sensor>
+      <app-line-graph-of-one-sensor [sensorData]="sensorData"
+                                    [currentSensorUnit]="selectedUnit.index"
+                                    [currentSensor]="4"></app-line-graph-of-one-sensor>
+      <app-line-graph-of-one-sensor [sensorData]="sensorData"
+                                    [currentSensorUnit]="selectedUnit.index"
+                                    [currentSensor]="5"></app-line-graph-of-one-sensor>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+

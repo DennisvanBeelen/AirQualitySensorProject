@@ -2,11 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b14b4fc-529f-4b6e-b773-743e94849c6c" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/../Back-end/firebasedata.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Back-end/firebasedata.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AirQualityDashboard/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.html" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/dashboard/dashboard.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/dashboard/dashboard.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/individualStatistics/line-graph-of-one-sensor/line-graph-of-one-sensor.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/individualStatistics/line-graph-of-one-sensor/line-graph-of-one-sensor.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.ts" afterDir="false" />
+>>>>>>> 5988eeb88a7d95d14b90a3165b31260751bd9a17
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,16 +43,19 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1kPuyn087f9y2RP8NytzHeg1GtA" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/individualStatistics" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -55,6 +68,9 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\SoftwareEngineering\Software Projects\AirQualitySensorProject\Front-end\AirQualityDashboard\src\app\components\statistics\individualStatistics" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\SoftwareEngineering\Software Projects\AirQualitySensorProject\Front-end\AirQualityDashboard\src\app\services" />
       <recent name="D:\SoftwareEngineering\Software Projects\AirQualitySensorProject\Front-end\AirQualityDashboard\src\app" />
@@ -97,12 +113,18 @@
       <workItem from="1610024261905" duration="2967000" />
       <workItem from="1610101168892" duration="2733000" />
       <workItem from="1610109825347" duration="4285000" />
+<<<<<<< HEAD
       <workItem from="1610354971587" duration="341000" />
       <workItem from="1610360476965" duration="17179000" />
       <workItem from="1610397621523" duration="1448000" />
       <workItem from="1610453613528" duration="150000" />
       <workItem from="1610461409106" duration="1049000" />
       <workItem from="1610540322611" duration="5331000" />
+=======
+      <workItem from="1610354971587" duration="7782000" />
+      <workItem from="1610449216539" duration="13203000" />
+      <workItem from="1610622902053" duration="6895000" />
+>>>>>>> 5988eeb88a7d95d14b90a3165b31260751bd9a17
     </task>
     <servers />
   </component>
@@ -134,5 +156,8 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610365795650" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
