@@ -35,6 +35,11 @@ import {MatListModule} from "@angular/material/list";
 import { StatTestComponent } from './components/statistics/individualStatistics/stat-test/stat-test.component';
 import {ChartModule} from "angular2-chartjs";
 import { LineGraphOfOneSensorComponent } from './components/statistics/individualStatistics/line-graph-of-one-sensor/line-graph-of-one-sensor.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {FormsModule} from "@angular/forms";
+import {MatTabsModule} from '@angular/material/tabs';
+
+
 
 @NgModule({
   declarations: [
@@ -49,7 +54,8 @@ import { LineGraphOfOneSensorComponent } from './components/statistics/individua
     InformationDisplayComponent,
     InformationPopupComponent,
     StatTestComponent,
-    LineGraphOfOneSensorComponent
+    LineGraphOfOneSensorComponent,
+
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -72,7 +78,10 @@ import { LineGraphOfOneSensorComponent } from './components/statistics/individua
     MatSortModule,
     MatChipsModule,
     MatListModule,
-    ChartModule
+    ChartModule,
+    MatRadioModule,
+    FormsModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

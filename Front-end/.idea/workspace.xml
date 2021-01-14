@@ -2,19 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b14b4fc-529f-4b6e-b773-743e94849c6c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/individualStatistics/line-graph-of-one-sensor/line-graph-of-one-sensor.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/individualStatistics/line-graph-of-one-sensor/line-graph-of-one-sensor.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/individualStatistics/line-graph-of-one-sensor/line-graph-of-one-sensor.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/individualStatistics/line-graph-of-one-sensor/line-graph-of-one-sensor.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/information/information-display/information-display.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/information/information-display/information-display.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/information/information-popup/information-popup.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/information/information-popup/information-popup.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/individualStatistics/stat-test/stat-test.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/individualStatistics/stat-test/stat-test.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/individualStatistics/stat-test/stat-test.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/individualStatistics/stat-test/stat-test.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/dashboard/dashboard.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/dashboard/dashboard.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/individualStatistics/line-graph-of-one-sensor/line-graph-of-one-sensor.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/individualStatistics/line-graph-of-one-sensor/line-graph-of-one-sensor.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/components/statistics/statistics.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AirQualityDashboard/src/app/interfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/AirQualityDashboard/src/app/interfaces.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +102,8 @@
       <workItem from="1610101168892" duration="2733000" />
       <workItem from="1610109825347" duration="4285000" />
       <workItem from="1610354971587" duration="7782000" />
-      <workItem from="1610449216539" duration="12569000" />
+      <workItem from="1610449216539" duration="13203000" />
+      <workItem from="1610622902053" duration="6895000" />
     </task>
     <servers />
   </component>
