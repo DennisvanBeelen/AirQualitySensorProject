@@ -1,6 +1,6 @@
 <div class="infoContainer">
   <div class="informationButtonContainer">
-    <button (click)="addDataToDB()">ADD DATA TO FIREBASE</button>
+<!--    <button (click)="addDataToDB()">ADD DATA TO FIREBASE</button>-->
     <h3 class="button-titles">Sensor types information</h3>
     <button *ngFor="let sensor of ST" mat-raised-button class="informationButtons"
             (click)="sensorInformationButtonClicked(sensor)">{{sensor.name}}</button>
