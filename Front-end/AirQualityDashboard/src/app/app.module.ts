@@ -39,6 +39,7 @@ import { LineGraphOfOneSensorComponent } from './components/statistics/individua
 import {MatRadioModule} from '@angular/material/radio';
 import {FormsModule} from "@angular/forms";
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -57,32 +58,33 @@ import {MatTabsModule} from '@angular/material/tabs';
     LineGraphOfOneSensorComponent,
 
   ],
-  imports: [
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatInputModule,
-    CommonModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatIconModule,
-    MatCardModule,
-    MatGridListModule,
-    MatSortModule,
-    MatChipsModule,
-    MatListModule,
-    ChartModule,
-    MatRadioModule,
-    FormsModule,
-    MatTabsModule
-  ],
+    imports: [
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFirestoreModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatTableModule,
+        MatFormFieldModule,
+        MatInputModule,
+        CommonModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatIconModule,
+        MatCardModule,
+        MatGridListModule,
+        MatSortModule,
+        MatChipsModule,
+        MatListModule,
+        ChartModule,
+        MatRadioModule,
+        FormsModule,
+        MatTabsModule,
+        MatProgressSpinnerModule
+    ],
   providers: [],
   bootstrap: [AppComponent],
   exports: []

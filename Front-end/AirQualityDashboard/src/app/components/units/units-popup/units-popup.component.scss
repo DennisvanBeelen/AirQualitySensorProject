@@ -1,27 +1,27 @@
-.popup-location{
+.popup-location {
   font-size: 250%;
 }
 
-.popup-id-and-time{
+.popup-id-and-time {
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.popup-sensor{
+.popup-sensor {
 
 }
 
-.popup-table{
+.popup-table {
   width: 750px;
 }
 
 
-.popup-devider{
+.popup-devider {
   margin-top: 15px;
   margin-bottom: 10px;
 }
 
-.safety_icon{
+.safety_icon {
   vertical-align: middle;
 }
 
@@ -33,7 +33,7 @@
 }
 
 
-.sensorDataText{
+.sensorDataText {
   cursor: pointer;
 }
 
@@ -45,11 +45,11 @@
   width: 100px;
 }
 
-.sensorDataContainer{
+.sensorDataContainer {
   padding: 8px 0;
 }
 
-.sensorDataButton{
+.sensorDataButton {
   margin: 2px;
   height: 42px;
 }
@@ -61,21 +61,23 @@
   height: 30px;
 }
 
-.safety-scale-red{
+.safety-scale-red {
   margin: 5px 0 10px 0;
   background-color: #ff3b3b;
   width: 100px;
   height: 15px;
   box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
 }
-.safety-scale-yellow{
+
+.safety-scale-yellow {
   margin: 5px 15px 10px 15px;
   background-color: #f9ff4a;
   width: 70px;
   height: 15px;
   box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
 }
-.safety-scale-green{
+
+.safety-scale-green {
   margin: 5px 10px 10px 10px;
   background-color: #42ff65;
   width: 50px;
@@ -83,8 +85,8 @@
   box-shadow: inset -1px 0 0 black, inset 0 -1px 0 black, inset 1px 0 0 black, inset 0 1px 0 black;
 }
 
-.safety-scale-CorrectValues{
-  background: rgba(0,0,0,0);
+.safety-scale-CorrectValues {
+  background: rgba(0, 0, 0, 0);
   width: 50px;
   height: 20px;
   box-shadow: inset -2px 0 0 black, inset 0 0 0 black, inset 2px 0 0 black, inset 0 0 0 black;
@@ -93,7 +95,7 @@
   left: 25px;
 }
 
-.safety-scale-CorrectValues-value-left{
+.safety-scale-CorrectValues-value-left {
   width: 50px;
   height: 10px;
   position: relative;
@@ -101,7 +103,7 @@
   left: -25px;
 }
 
-.safety-scale-CorrectValues-value-right{
+.safety-scale-CorrectValues-value-right {
   width: 50px;
   height: 10px;
   position: relative;
@@ -109,8 +111,8 @@
   left: 25px;
 }
 
-.safety-scale-Pointer{
-  background: rgba(0,0,0,0);
+.safety-scale-Pointer {
+  background: rgba(0, 0, 0, 0);
   width: 3px;
   height: 16px;
   box-shadow: inset 0px 0 0 white, inset 0 0 0 black, inset 2px 0 0 #0004ff, inset 0 0 0 black;
@@ -118,3 +120,13 @@
   top: -25px;
 }
 
+.popup-export-container {
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  margin-top: -40px;
+}
+
+.popup-export-container button {
+  margin-left: 15px;
+}
