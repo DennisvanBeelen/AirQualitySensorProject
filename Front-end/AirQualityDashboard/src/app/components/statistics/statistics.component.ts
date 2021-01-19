@@ -1,52 +1,76 @@
 import {Component, OnInit} from '@angular/core';
-import {MatTableDataSource} from "@angular/material/table";
-import {firebaseService} from "../../services/firebaseService";
-import {dataService} from "../../services/dataService";
+import {firebaseService} from '../../services/firebaseService';
+import {dataService} from '../../services/dataService';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
-  selector: 'app-statistics',
-  providers: [firebaseService, dataService],
-  templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.scss']
+    selector: 'app-statistics',
+    providers: [firebaseService, dataService],
+    templateUrl: './statistics.component.html',
+    styleUrls: ['./statistics.component.scss']
 })
 export class StatisticsComponent implements OnInit {
-  sensorDataCollectioPath = 'sensorData';
-  sensorData;
-  selectedUnit = {location: '', id: '', index: null};
 
+    sensorDataCollectioPath = 'sensorData';
+    sensorData = [];
+    selectedUnit = {location: '', id: '', index: null};
 
-  constructor(private firebaseServ: firebaseService, private dataService: dataService) {
-  }
+    wantedLength = 50;
+    sensorNumbers = [0, 1, 2, 3, 4, 5, 6];
 
-  ngOnInit(): void {
-    this.getLiveDataFromDB();
-  }
-
-  getLiveDataFromDB() {
-    this.firebaseServ.getLiveCollectionFromFirebase(this.sensorDataCollectioPath).subscribe(data => {
-      this.sensorData = this.createStatData(data);
-      this.unitSelected({index: 0});
-    });
-  }
-
-  createStatData(data) {
-    let newData = [];
-    for (let i = 0; i < data.length; i++) {
-      newData.push(data[i].payload.doc.data());
-      newData[i].sensorData = this.dataService.createArrayFromObject(data[i].payload.doc.data().sensorData);
+    constructor(private firebaseServ: firebaseService, private dataService: dataService) {
     }
-    return newData
-  }
 
-  unitSelected(tab){
-    this.selectedUnit.location = this.sensorData[tab.index].location;
-    this.selectedUnit.id = this.sensorData[tab.index].id;
-    this.selectedUnit.index = tab.index;
-  }
+    ngOnInit(): void {
+        this.getLiveDataFromDB();
+    }
 
-  CL(tab) {
-    console.log(tab);
-  }
+    getLiveDataFromDB() {
+        this.firebaseServ.getLiveCollectionFromFirebase(this.sensorDataCollectioPath).subscribe(data => {
+            if (this.sensorData.length < data.length) {
+                this.initSensorData(data)
+            }
+
+            this.updateStatisticsData(data);
+            this.unitSelected({index: 0});
+        });
+    }
+
+    initSensorData(firebaseData) {
+        this.sensorData = [];
+        for (let i = 0; i < firebaseData.length; i++) {
+            this.sensorData.push({id: firebaseData[i].payload.doc.data().id, sensorData: new BehaviorSubject([])})
+        }
+    }
+
+    updateStatisticsData(data) {
+        for (let i = 0; i < data.length; i++) {
+
+            const dataArray = this.createDataArray(data[i].payload.doc.data().sensorData);
+
+            if (this.sensorData[i].sensorData.getValue() !== dataArray) {
+                this.sensorData[i].sensorData.next(dataArray)
+            }
+        }
+    }
+
+    createDataArray(sensorDataArray) {
+        let dataArray = this.dataService.createArrayFromObject(sensorDataArray);
+        dataArray = this.dataService.sortArrayOnTimestamp(dataArray);
+        dataArray = this.dataService.cutArrayToWantedSize(dataArray, this.wantedLength);
+
+        return dataArray
+    }
+
+    unitSelected(tab) {
+        this.selectedUnit.location = this.sensorData[tab.index].location;
+        this.selectedUnit.id = this.sensorData[tab.index].id;
+        this.selectedUnit.index = tab.index;
+    }
+
+    CL(tab) {
+        console.log(tab);
+    }
 
 
 }

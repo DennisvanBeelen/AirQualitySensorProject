@@ -1,15 +1,9 @@
-<div>
-    <canvas #gaugeCanvas height="150px" width="250px"></canvas>
+<div >
+    <div>{{sensorType}}:</div>
+    <canvas #gaugeCanvas height="75px" width="100px"></canvas>
     <div class="gauge-numbers">
         <div class="gauge-min">{{gaugeMin}}</div>
+        <div class="gauge-val">{{gaugeValue | number}}</div>
         <div class="gauge-max">{{gaugeMax}}</div>
     </div>
-
-</div>
-<div>
-    <input [(ngModel)]="pointerPercent" (ngModelChange)="drawPointer(pointerPercent, true)">
-
-    <button (click)="up()">Up</button>
-    <button (click)="down()">Down</button>
-    <button (click)="run()">Run</button>
 </div>

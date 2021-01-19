@@ -6,12 +6,20 @@
       <h2 class="location">Unit location: {{selectedUnit.location}}</h2>
       <h2 class="id">Unit id: {{selectedUnit.id}}</h2>
 
-      <!--  TODO: WESSEL ZIJN METERS HIERO!!!!!-->
+      <div class="gauge-container">
+        <ng-container *ngFor="let currentSensor of sensorNumbers">
+          <app-gauge [sensorData]="sensorData"
+                     [currentSensorUnit]="i"
+                     [currentSensor]="currentSensor"></app-gauge>
+        </ng-container>
+      </div>
+      <ng-container *ngFor="let currentSensor of sensorNumbers">
+        <app-line-graph-of-one-sensor [sensorData]="sensorData"
+                                      [currentSensorUnit]="i"
+                                      [currentSensor]="currentSensor"></app-line-graph-of-one-sensor>
+      </ng-container>
 
-      <app-line-graph-of-one-sensor [sensorData]="sensorData"
-                                    [currentSensorUnit]="selectedUnit.index"
-                                    [currentSensor]="1"></app-line-graph-of-one-sensor>
-      <app-line-graph-of-one-sensor [sensorData]="sensorData"
+<!--      <app-line-graph-of-one-sensor [sensorData]="sensorData"
                                     [currentSensorUnit]="selectedUnit.index"
                                     [currentSensor]="0"></app-line-graph-of-one-sensor>
       <app-line-graph-of-one-sensor [sensorData]="sensorData"
@@ -28,7 +36,7 @@
                                     [currentSensor]="4"></app-line-graph-of-one-sensor>
       <app-line-graph-of-one-sensor [sensorData]="sensorData"
                                     [currentSensorUnit]="selectedUnit.index"
-                                    [currentSensor]="5"></app-line-graph-of-one-sensor>
+                                    [currentSensor]="5"></app-line-graph-of-one-sensor>-->
     </div>
   </mat-tab>
 </mat-tab-group>

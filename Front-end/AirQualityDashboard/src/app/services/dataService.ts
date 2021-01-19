@@ -105,9 +105,22 @@ export class dataService {
     }
   }
 
-
   roundSensorData(sensorValue) {
     return Math.round((Number(sensorValue) + Number.EPSILON) * 100) / 100
+  }
+
+  cutArrayToWantedSize(array, wantedLength) {
+    if (array.length > wantedLength) {
+      let amountToLong = array.length - wantedLength;
+      array.splice(0, amountToLong);
+    }
+    return array;
+  }
+
+  sortArrayOnTimestamp(array) {
+    return array.sort(function (a, b) {
+      return a.timestamp - b.timestamp
+    });
   }
 }
 

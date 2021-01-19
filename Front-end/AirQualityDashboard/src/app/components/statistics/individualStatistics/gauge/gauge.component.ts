@@ -1,16 +1,28 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {of, range, Subject} from 'rxjs';
+import {dataService} from '../../../../services/dataService';
+import {concatMap, delay, takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'app-gauge',
     templateUrl: './gauge.component.html',
     styleUrls: ['./gauge.component.scss']
 })
-export class GaugeComponent implements OnInit {
+export class GaugeComponent implements OnInit, OnDestroy {
 
     @Input() sensorData;
-    ctx: CanvasRenderingContext2D;
-    @ViewChild('gaugeCanvas', {static: true}) canvas: ElementRef<HTMLCanvasElement>;
+    @Input() currentSensor;
+    @Input() currentSensorUnit;
 
+    colors = ['#F44336', '#FFEB3B', '#4CAF50', '#FFEB3B', '#F44336'];
+    boundaries: number[];
+
+    @ViewChild('gaugeCanvas', {static: true}) canvas: ElementRef<HTMLCanvasElement>;
+    ctx: CanvasRenderingContext2D;
+
+    doneSetup = false;
+    sensorType;
+    gaugeValue: number = 0;
     gaugeMax: number = 0;
     gaugeMin: number = 0;
 
@@ -23,17 +35,29 @@ export class GaugeComponent implements OnInit {
     centerX: number;
     centerY: number;
     radius: number;
-    pointerPercent: number;
+    currentPercent: number = 0;
 
-    constructor() {
+    gaugeAnimationSub;
+    stopSubscription = new Subject();
+
+    constructor(private dataService: dataService) {
     }
 
     ngOnInit(): void {
-        console.log(this.sensorData);
+        this.setupSensorInfo();
+        this.setupCanvas();
+        this.setupGaugeBody();
 
+        this.setupValue();
 
-        const boundaries = [0, 25, 50, 75, 80, 100];
+        this.doneSetup = true;
+    }
 
+    ngOnDestroy() {
+        this.stopSubscription.next(true);
+    }
+
+    setupCanvas() {
         this.ctx = this.canvas.nativeElement.getContext('2d');
         this.ctx.imageSmoothingEnabled = true;
         this.width = this.canvas.nativeElement.width;
@@ -41,15 +65,25 @@ export class GaugeComponent implements OnInit {
 
         this.centerX = this.width / 2;
         this.centerY = this.height / 4 * 3;
-        this.radius = this.canvas.nativeElement.width / 4;
+        this.radius = this.canvas.nativeElement.width / 2.5;
+    }
 
+    setupSensorInfo() {
+        let sensorType = this.dataService.getCorrectSensorType(this.sensorData[this.currentSensorUnit].sensorData.getValue()[0].data[this.currentSensor].sensorType);
 
-        this.drawGaugeBody(boundaries, ['#F44336', '#4CAF50', '#F44336', '#4CAF50', '#F44336']);
+        this.colors = sensorType.gaugeColors;
+        this.boundaries = sensorType.gaugeBoundaries;
+        this.sensorType = sensorType.name;
 
-        this.drawPointer(0, false);
+        this.gaugeMin = this.boundaries[0];
+        this.gaugeMax = this.boundaries[this.boundaries.length - 1];
 
-        this.gaugeMin = boundaries[0];
-        this.gaugeMax = boundaries[boundaries.length - 1];
+    }
+
+    setupGaugeBody() {
+        this.drawGaugeBody(this.boundaries, this.colors);
+        this.drawPointerBase();
+        this.saveGauge();
     }
 
     drawGaugeBody(boundaries: number[], colors: string[]) {
@@ -78,44 +112,99 @@ export class GaugeComponent implements OnInit {
 
             startingAngle += endingAngle;
         }
-
-        this.saveGaugeBody();
     }
 
-    saveGaugeBody() {
+    drawPointerBase() {
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = '#222';
+        this.ctx.fillStyle = '#222';
+        this.ctx.lineWidth = 4;
+
+        this.ctx.arc(this.centerX, this.centerY, 6, 0,
+            2 * Math.PI);
+
+        this.ctx.stroke();
+        this.ctx.fill();
+        this.ctx.closePath();
+    }
+
+    saveGauge() {
         this.baseDataX = this.centerX - this.radius - 10;
         this.baseDataY = this.centerY - this.radius - 10;
         this.canvasBaseData = this.ctx.getImageData(this.baseDataX, this.baseDataY, this.width, this.height);
     }
 
-    up() {
-        this.pointerPercent++;
-        this.drawPointer(this.pointerPercent, true);
+    setupValue() {
+        this.sensorData[this.currentSensorUnit].sensorData.pipe(takeUntil(this.stopSubscription)).subscribe(data => {
+            this.setPointerValue(data);
+        })
     }
 
-    down() {
-        this.pointerPercent--;
-        this.drawPointer(this.pointerPercent, true);
-    }
+    setPointerValue(firebaseData) {
+        let combinedValues = 0;
 
-    run() {
-        this.pointerPercent = 0;
-        for (let i = 0; i < 100 * 4; i++) {
-            this.pointerPercent += 0.25;
-            debugger
-            this.drawPointer(this.pointerPercent, true)
+        for (let i = 0; i < firebaseData.length; i++) {
+            combinedValues += parseInt(firebaseData[i].data[this.currentSensor].sensorValue);
         }
+
+        this.gaugeValue = combinedValues / firebaseData.length;
+        this.updatePointer()
+    }
+
+
+    update(e) {
+        if (e.key == 'Enter') {
+            this.updatePointer();
+        }
+    }
+
+    updatePointer() {
+        if (!this.gaugeValue) {
+            return;
+        }
+
+
+        const percent = Math.round(((this.gaugeValue - this.gaugeMin) / (this.gaugeMax - this.gaugeMin)) * 100);
+        let percentDifference = percent - this.currentPercent;
+
+        percentDifference = Math.min(100, percentDifference);
+        percentDifference = Math.max(-100, percentDifference);
+
+        if (percentDifference === 0 || isNaN(percentDifference)) {
+            return;
+        }
+
+        const isDirectionPositive = percentDifference > 0;
+
+        if (this.gaugeAnimationSub) {
+            this.gaugeAnimationSub.unsubscribe();
+        }
+
+        this.gaugeAnimationSub = range(1, Math.abs(percentDifference)).pipe(takeUntil(this.stopSubscription),
+            concatMap(i => of(i).pipe(delay(10)))
+        ).subscribe(val => {
+            if (isDirectionPositive) {
+                this.drawPointer(this.currentPercent + val, true);
+                if (val === percentDifference) {
+                    this.currentPercent = Math.min(100, this.currentPercent + percentDifference);
+                }
+            } else {
+                this.drawPointer(this.currentPercent - val, true);
+                if (-1 * val === percentDifference) {
+                    this.currentPercent = Math.max(0, this.currentPercent + percentDifference);
+                }
+            }
+        });
     }
 
     drawPointer(percent: number, refresh?: boolean) {
         if (refresh) {
             this.ctx.putImageData(this.canvasBaseData, this.baseDataX, this.baseDataY);
         }
-        this.drawPointerBase(percent);
-        this.drawPointerArm();
+        this.drawPointerArm(percent);
     }
 
-    drawPointerBase(percent: number) {
+    drawPointerArm(percent: number) {
         if (percent > 100) {
             percent = 100
         }
@@ -146,20 +235,6 @@ export class GaugeComponent implements OnInit {
         this.ctx.lineTo(endX, endY);
         this.ctx.fill();
         this.ctx.stroke();
-        this.ctx.closePath();
-    }
-
-    drawPointerArm() {
-        this.ctx.beginPath();
-        this.ctx.strokeStyle = '#222';
-        this.ctx.fillStyle = '#222';
-        this.ctx.lineWidth = 4;
-
-        this.ctx.arc(this.centerX, this.centerY, 6, 0,
-            2 * Math.PI);
-
-        this.ctx.stroke();
-        this.ctx.fill();
         this.ctx.closePath();
     }
 

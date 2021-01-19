@@ -36,7 +36,6 @@ export class UnitsPopupComponent implements OnInit, AfterViewInit {
 
     async exportDataClicked() {
         this.exportingData = true;
-        console.log(this.data.sensorData);
         const base64DataString = await this.formatDataAsCSV(this.data.sensorData);
         this.downloadExportedData(base64DataString);
     }
