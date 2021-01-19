@@ -18,6 +18,8 @@ def parse_config():
             config_file_line = config_file_line.replace('\n', '')
             config_attribute, config_value = config_file_line.split(': ')
 
+            config_attribute = config_attribute.replace(' ', '_')
+
             config[config_attribute] = config_value
 
     except:
@@ -34,10 +36,14 @@ def check_config():
     elif 'collection' not in config:
         raise Exception('No collection name found in config file!')
 
-    elif 'cert' not in config:
-        raise Exception('No path to cert found in config!')
-    elif not os.path.isfile(config['cert']):
-        raise Exception('No cert file was found at location found in config file!')
+    elif 'password' not in config:
+        raise Exception('No password found in config!')
+    elif 'username' not in config:
+        raise Exception('No username found in config!')
+    elif 'firebase_rest_url' not in config:
+        raise Exception('No firebase rest url found in config!')
+    elif 'firebase_api_key' not in config:
+        raise Exception('No firebase api key found in config!')
 
 
 def set_up_sensors():
