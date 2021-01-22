@@ -1,7 +1,9 @@
 from datetime import datetime
-from firebase_admin import credentials
 from firebase_admin import firestore
-import firebase_admin
+from google.oauth2.credentials import Credentials
+from google.cloud.firestore import Client
+import requests
+import json
 
 
 class FirebaseClient:
@@ -14,14 +16,31 @@ class FirebaseClient:
         self.location = config['location']
         self.collection = config['collection']
 
-        self.firestore_client = self.set_up_firebase_connection(config['cert'])
+        self.firestore_client = self.set_up_firebase_connection(config)
 
         self.timestamp = str(datetime.now().replace(microsecond=0))
 
-    def set_up_firebase_connection(self, certificate):
-        cred = credentials.Certificate(certificate)
-        firebase_admin.initialize_app(cred)
-        return firestore.client()
+    def set_up_firebase_connection(self, config):
+        oauth_response = self.get_firebase_oauth_token(config)
+
+        cred = Credentials(oauth_response['idToken'], oauth_response['refreshToken'])
+
+        return Client("sensortechminor", cred)
+
+    def get_firebase_oauth_token(self, config):
+        request_url = config['firebase_rest_url'] + ":signInWithPassword?key=" + config['firebase_api_key']
+        headers = {"content-type": "application/json; charset=UTF-8"}
+        data = json.dumps({
+            "email": config['email'],
+            "password": config['password'],
+            "returnSecureToken": True
+        })
+
+        oauth_response = requests.post(request_url, headers=headers, data=data)
+
+        oauth_response.raise_for_status()
+
+        return oauth_response.json()
 
     def update_sensors_values(self):
         for sensor in self.sensors:

@@ -23,36 +23,38 @@ def parse_config():
             config[config_attribute] = config_value
 
     except:
-        raise Exception("Config file was formatted wrong!")
+        raise Exception("Config file was bad formatted!")
 
 
 def check_config():
     if 'id' not in config:
-        raise Exception('No id found in config file!')
+        raise Exception('No id fount in config file!')
     elif 'name' not in config:
-        raise Exception('No name found in config file!')
+        raise Exception('No name fount in config file!')
     elif 'location' not in config:
-        raise Exception('No location found in config file!')
+        raise Exception('No location fount in config file!')
     elif 'collection' not in config:
-        raise Exception('No collection name found in config file!')
+        raise Exception('No collection name fount in config file!')
 
     elif 'password' not in config:
         raise Exception('No password found in config!')
-    elif 'username' not in config:
-        raise Exception('No username found in config!')
+    elif 'email' not in config:
+        raise Exception('No email found in config!')
     elif 'firebase_rest_url' not in config:
         raise Exception('No firebase rest url found in config!')
     elif 'firebase_api_key' not in config:
         raise Exception('No firebase api key found in config!')
 
 
+
+
 def set_up_sensors():
     print('init setup sensors')
 
-    sensors.append(sensordata.AirQualitySensor())
-    sensors.append(sensordata.Co2Sensor())
-    sensors.append(sensordata.BmpSensor())
-    sensors.append(sensordata.DhtSensor())
+    sensors.append(sensordata.AirQualitySensor)
+    sensors.append(sensordata.Co2Sensor)
+    sensors.append(sensordata.BmpSensor)
+    sensors.append(sensordata.DhtSensor)
 
     for sensor in sensors:
         sensor.set_up()
@@ -81,12 +83,10 @@ def main():
     firebase_client = set_up()
 
     while True:
-        #firebase_client.simulate_sensor_values()
         firebase_client.update_sensors_values()
         firebase_client.send_data_to_firebase()
 
         time.sleep(2)
-
 
 
 main()
