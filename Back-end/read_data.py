@@ -33,7 +33,7 @@ def get_dht_value():
         # Print the values to the serial port
         temperature = dht_device.temperature
         humidity = dht_device.humidity
-        return humidity, temperature
+        return temperature, humidity
  
     except RuntimeError as error:
         print(error.args[0])
@@ -89,3 +89,4 @@ def main():
         
 if __name__ == "__main__":
     main()
+b

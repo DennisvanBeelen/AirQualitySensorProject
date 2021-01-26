@@ -5,6 +5,7 @@ import board
 import adafruit_dht
 import adafruit_mcp3xxx.mcp3008 as MCP
 import adafruit_bmp280
+import math
 from adafruit_mcp3xxx.analog_in import AnalogIn
 
 from signal import signal, SIGINT, SIGTERM
@@ -54,15 +55,24 @@ class Sensor:
             sensor_data.append(data)
 
         return sensor_data
+    
+    def warm_up(self):
+        print("Warming up gas sensors, please wait.")
+        for x in range(180):
+            percentage_complete = x / 180 * 100
+            if percentage_complete % 10 == 0:
+                print(percentage_complete)
+               
+            sleep(1)
 
 
-class DhtSensor(Sensor):
+class HumiditySensor(Sensor):
 
     def __init__(self):
-        super().__init__("adafruit_dht")
+        super().__init__("Humidity Sensor")
 
-        temperature_output = SensorOutput("temperature", "°", 20, 50)
-        humidity_output = SensorOutput("humidity", "%", 20, 75)
+        temperature_output = SensorOutput("Temperature", "°C", 10, 25)
+        humidity_output = SensorOutput("Humidity", "%", 20, 75)
         self.add_output(temperature_output)
         self.add_output(humidity_output)
 
@@ -77,22 +87,22 @@ class DhtSensor(Sensor):
 
     def calc_value(self):
         try:
-            self.output["temperature"].value = self.dht_device.temperature
-            self.output["humidity"].value = self.dht_device.humidity
+            self.output["Temperature"].value = self.dht_device.temperature
+            self.output["Humidity"].value = self.dht_device.humidity
 
         except RuntimeError as error:
             print(error.args[0])
             return None
 
 
-class BmpSensor(Sensor):
+class PressureSensor(Sensor):
 
     def __init__(self):
-        super().__init__("adafruit_bmp280")
+        super().__init__("Pressure Sensor")
 
-        temperature_output = SensorOutput("temperature", "°", 20, 50)
-        pressure_output = SensorOutput("pressure", "bar", 20, 50)
-        altitude_output = SensorOutput("altitude", "m", 1, 100)
+        temperature_output = SensorOutput("Temperature", "°C", 10, 25)
+        pressure_output = SensorOutput("Pressure", "hbar", 980, 1020)
+        altitude_output = SensorOutput("Altitude", "m", 1, 100)
 
         self.add_output(temperature_output)
         self.add_output(pressure_output)
@@ -105,9 +115,9 @@ class BmpSensor(Sensor):
         self.barometer = adafruit_bmp280.Adafruit_BMP280_I2C(i2c)
 
     def calc_value(self):
-        self.output["temperature"].value = self.barometer.temperature
-        self.output["pressure"].value = self.barometer.pressure
-        self.output["altitude"].value = self.barometer.altitude
+        self.output["Temperature"].value = self.barometer.temperature
+        self.output["Pressure"].value = self.barometer.pressure
+        self.output["Altitude"].value = self.barometer.altitude
 
 
 class AnalogSensor(Sensor):
@@ -115,6 +125,10 @@ class AnalogSensor(Sensor):
         super().__init__(name)
         self.mcp = mcp
         self.channel = any
+        self.r0 = None
+        self.vrl = 3.3 #Spanningsbereik - (0V - 3V3)
+        self.slope = None
+        self.b = None
 
     def set_up(self):
         spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
@@ -124,23 +138,34 @@ class AnalogSensor(Sensor):
 
     def calc_value(self):
         output_key = list(self.output)[0]
+        
+        voltage = self.channel.voltage
+        rs = ((self.vrl * 10) / voltage) - 10
+        rsr0 = rs / self.r0
+        log_rsr0 = math.log10(rsr0)
+        log_ppm = (log_rsr0 - self.b) / self.slope
+        ppm = pow(10, log_ppm)
+        
+        self.output[output_key].value = ppm
 
-        # TODO from voltage to value
-        self.output[output_key].value = self.channel.voltage
 
-
-class Co2Sensor(AnalogSensor):
+class COSensor(AnalogSensor):
 
     def __init__(self):
-        super().__init__("Co2 sensor", MCP.P0)
+        super().__init__("CO Sensor", MCP.P0)
+        self.r0 = 1.095939929029228
+        self.slope = -0.7536
+        self.b = 1.4189
+        co_output = SensorOutput("CO", "ppm", 15, 75)
+        self.add_output(co_output)
 
-        co2_output = SensorOutput("co2", "ppm", 15, 75)
+
+class CO2Sensor(AnalogSensor):
+
+    def __init__(self):
+        super().__init__("CO2 Sensor", MCP.P1)
+        self.r0 = 13.003959679866863
+        self.slope = -0.3597
+        self.b = 0.7439
+        co2_output = SensorOutput("CO2", "ppm", 15, 75)
         self.add_output(co2_output)
-
-
-class AirQualitySensor(AnalogSensor):
-
-    def __init__(self):
-        super().__init__("Air quality sensor", MCP.P1)
-        air_quality_output = SensorOutput("Air quality", "ppm", 15, 75)
-        self.add_output(air_quality_output)

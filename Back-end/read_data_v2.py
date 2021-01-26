@@ -23,7 +23,7 @@ def parse_config():
             config[config_attribute] = config_value
 
     except:
-        raise Exception("Config file was bad formatted!")
+        raise Exception("Config file was formatted!")
 
 
 def check_config():
@@ -51,14 +51,18 @@ def check_config():
 def set_up_sensors():
     print('init setup sensors')
 
-    sensors.append(sensordata.AirQualitySensor)
-    sensors.append(sensordata.Co2Sensor)
-    sensors.append(sensordata.BmpSensor)
-    sensors.append(sensordata.DhtSensor)
+    sensors.append(sensordata.CO2Sensor())
+    sensors.append(sensordata.COSensor())
+    sensors.append(sensordata.PressureSensor())
+    sensors.append(sensordata.HumiditySensor())
 
     for sensor in sensors:
         sensor.set_up()
+    
+    #TO-DO: Uncomment
+    #sensors[0].warm_up()
 
+        
     return sensors
 
 

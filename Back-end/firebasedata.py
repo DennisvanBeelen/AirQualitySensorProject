@@ -78,6 +78,7 @@ class FirebaseClient:
                 }
             }
         }
+        print(firebase_data)
 
         return firebase_data
 
