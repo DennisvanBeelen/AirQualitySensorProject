@@ -9,7 +9,7 @@ import {firebaseService} from "../../services/firebaseService";
   styleUrls: ['./information.component.scss']
 })
 export class InformationComponent implements OnInit {
-  ST = [SensorType.PRESSURE, SensorType.AIRQUALITY, SensorType.HUMIDITY, SensorType.TEMPERATURE, SensorType.ALTITUDE, SensorType.CO2]
+  ST = [SensorType.PRESSURE, SensorType.AIRQUALITY, SensorType.HUMIDITY, SensorType.TEMPERATURE, SensorType.ALTITUDE, SensorType.CO2, SensorType.CO]
   informationData;
   infoData;
 

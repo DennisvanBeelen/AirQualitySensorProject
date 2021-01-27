@@ -39,7 +39,7 @@ export class StatisticsComponent implements OnInit {
     initSensorData(firebaseData) {
         this.sensorData = [];
         for (let i = 0; i < firebaseData.length; i++) {
-            this.sensorData.push({id: firebaseData[i].payload.doc.data().id, sensorData: new BehaviorSubject([])})
+            this.sensorData.push({id: firebaseData[i].payload.doc.data().id,location: firebaseData[i].payload.doc.data().location ,sensorData: new BehaviorSubject([])})
         }
     }
 

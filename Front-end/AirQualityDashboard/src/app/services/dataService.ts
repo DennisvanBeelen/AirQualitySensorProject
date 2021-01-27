@@ -46,7 +46,7 @@ export class dataService {
   getSafetyRating(sensorName, sensorValue) {
     let sensor = this.getCorrectSensorType(sensorName);
     let betweenMinAndMax = sensor.maximumValue - sensor.minimalValue;
-    let stepsBetween = betweenMinAndMax/5;
+    let stepsBetween = betweenMinAndMax / 5;
     let offset = 0;
 
     if (sensorValue < sensor.maximumValue && sensorValue > sensor.minimalValue) {
@@ -58,27 +58,33 @@ export class dataService {
     }
   }
 
-  getSafetyRatingGreen(sensorValue, sensor, stepsBetween, offset){
-    if (sensorValue > sensor.maximumValue - (stepsBetween)){ return (45-offset)+ "px"}
-    else if (sensorValue > sensor.maximumValue - (stepsBetween*2)){ return (35-offset)+"px"}
-    else if (sensorValue < sensor.minimalValue + (stepsBetween)){ return (5-offset)+"px"}
-    else if (sensorValue < sensor.minimalValue + (stepsBetween)){ return (15-offset)+"px"}
-    else {return (25-offset)+"px";} // dead center
+  getSafetyRatingGreen(sensorValue, sensor, stepsBetween, offset) {
+    if (sensorValue > sensor.maximumValue - (stepsBetween)) {
+      return (45 - offset) + "px"
+    } else if (sensorValue > sensor.maximumValue - (stepsBetween * 2)) {
+      return (35 - offset) + "px"
+    } else if (sensorValue < sensor.minimalValue + (stepsBetween)) {
+      return (5 - offset) + "px"
+    } else if (sensorValue < sensor.minimalValue + (stepsBetween)) {
+      return (15 - offset) + "px"
+    } else {
+      return (25 - offset) + "px";
+    } // dead center
   }
 
-  getSafetyRatingYellow(sensorValue, sensor, stepsBetween, offset){
+  getSafetyRatingYellow(sensorValue, sensor, stepsBetween, offset) {
     if (sensorValue < sensor.minimalValue) {
-      return (-5-offset)+"px"; // left yellow
+      return (-5 - offset) + "px"; // left yellow
     } else {
-      return (54-offset)+"px"; // right yellow
+      return (54 - offset) + "px"; // right yellow
     }
   }
 
-  getSafetyRatingRed(sensorValue, sensor, stepsBetween, offset){
+  getSafetyRatingRed(sensorValue, sensor, stepsBetween, offset) {
     if (sensorValue > (sensor.maximumValue + (sensor.maximumValue * this.extraAllowance))) {
-      return (70-offset)+ "px";
+      return (70 - offset) + "px";
     } else {
-      return (-20-offset)+"px";
+      return (-20 - offset) + "px";
     }
   }
 
@@ -102,6 +108,9 @@ export class dataService {
 
       case SensorType.CO2.type.toLowerCase():
         return SensorType.CO2;
+
+      case SensorType.CO.type.toLocaleLowerCase():
+        return SensorType.CO;
     }
   }
 
