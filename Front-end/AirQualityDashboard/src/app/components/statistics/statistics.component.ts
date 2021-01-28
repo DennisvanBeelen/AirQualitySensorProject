@@ -15,8 +15,8 @@ export class StatisticsComponent implements OnInit {
     sensorData = [];
     selectedUnit = {location: '', id: '', index: null};
 
-    wantedLength = 50;
-    sensorNumbers = [0, 1, 2, 3, 4, 5, 6];
+    graphWantedLength = 50;
+    sensorNumbers = [];
 
     constructor(private firebaseServ: firebaseService, private dataService: dataService) {
     }
@@ -39,7 +39,8 @@ export class StatisticsComponent implements OnInit {
     initSensorData(firebaseData) {
         this.sensorData = [];
         for (let i = 0; i < firebaseData.length; i++) {
-            this.sensorData.push({id: firebaseData[i].payload.doc.data().id,location: firebaseData[i].payload.doc.data().location ,sensorData: new BehaviorSubject([])})
+
+            this.sensorData.push({id: firebaseData[i].payload.doc.data().id,location: firebaseData[i].payload.doc.data().location , sensorNumbers: [],sensorData: new BehaviorSubject([])})
         }
     }
 
@@ -49,6 +50,8 @@ export class StatisticsComponent implements OnInit {
             const dataArray = this.createDataArray(data[i].payload.doc.data().sensorData);
 
             if (this.sensorData[i].sensorData.getValue() !== dataArray) {
+                this.setNumberOfSensors(i, dataArray);
+
                 this.sensorData[i].sensorData.next(dataArray)
             }
         }
@@ -57,9 +60,13 @@ export class StatisticsComponent implements OnInit {
     createDataArray(sensorDataArray) {
         let dataArray = this.dataService.createArrayFromObject(sensorDataArray);
         dataArray = this.dataService.sortArrayOnTimestamp(dataArray);
-        dataArray = this.dataService.cutArrayToWantedSize(dataArray, this.wantedLength);
 
         return dataArray
+    }
+
+    setNumberOfSensors(unitIndex: number, unitData) {
+        const numberOfSensors = unitData[unitIndex].data.length;
+        this.sensorData[unitIndex].sensorNumbers = Array.from({length: numberOfSensors}, (_, index) => index);
     }
 
     unitSelected(tab) {

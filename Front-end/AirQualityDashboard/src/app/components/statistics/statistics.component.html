@@ -7,14 +7,14 @@
       <h2 class="id">Unit id: {{selectedUnit.id}}</h2>
 
       <div class="gauge-container">
-        <ng-container *ngFor="let currentSensor of sensorNumbers">
-          <app-gauge [sensorData]="sensorData"
+        <ng-container *ngFor="let currentSensor of sensorData[i].sensorNumbers">
+          <app-gauge [wantedLength]="graphWantedLength" [sensorData]="sensorData"
                      [currentSensorUnit]="i"
                      [currentSensor]="currentSensor"></app-gauge>
         </ng-container>
       </div>
-      <ng-container *ngFor="let currentSensor of sensorNumbers">
-        <app-line-graph-of-one-sensor [sensorData]="sensorData"
+      <ng-container *ngFor="let currentSensor of sensorData[i].sensorNumbers">
+        <app-line-graph-of-one-sensor [wantedLength]="graphWantedLength" [sensorData]="sensorData"
                                       [currentSensorUnit]="i"
                                       [currentSensor]="currentSensor"></app-line-graph-of-one-sensor>
       </ng-container>

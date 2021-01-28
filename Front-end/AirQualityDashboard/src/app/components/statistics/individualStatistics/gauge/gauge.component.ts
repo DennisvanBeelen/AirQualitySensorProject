@@ -11,6 +11,7 @@ import {concatMap, delay, takeUntil} from 'rxjs/operators';
 export class GaugeComponent implements OnInit, OnDestroy {
 
     @Input() sensorData;
+    @Input() wantedLength = 50;
     @Input() currentSensor;
     @Input() currentSensorUnit;
 
@@ -136,6 +137,9 @@ export class GaugeComponent implements OnInit, OnDestroy {
 
     setupValue() {
         this.sensorData[this.currentSensorUnit].sensorData.pipe(takeUntil(this.stopSubscription)).subscribe(data => {
+            data = this.dataService.cutArrayToWantedSize(data, this.wantedLength);
+
+
             this.setPointerValue(data);
         })
     }
