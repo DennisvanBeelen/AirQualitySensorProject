@@ -111,13 +111,13 @@ export const SensorType = {
     type: 'CO2',
     unitType: 'ppm',
     minimalValue: 0,
-    maximumValue: 2,
-    gaugeBoundaries: [0, 1, 2, 3],
+    maximumValue: 2000,
+    gaugeBoundaries: [0, 1000, 2000, 5000],
     gaugeColors: ['#4CAF50', '#FFEB3B', '#F44336'],
     infoLink: "https://www.dhs.wisconsin.gov/chemical/carbondioxide.htm#:~:text=The%20levels%20of%20CO2%20in,(normal)%20outdoor%20air%20level.&text=1%2C000%20%2D%202%2C000%20ppm%3A%20level%20associated,stagnant%2C%20stale%2C%20stuffy%20air.",
     sensorInfo: "CO2 is the fourth most abundant gas in the earth's atmosphere. At room temperature, carbon dioxide (CO2) is a colorless, odorless, non-flammable gas, at other temperatures and pressures, carbon dioxide can be a liquid or a solid. \n\n" +
-      "0.250 is seen as normal outdoor values in a nature setting. \n" +
-      "2-5 could lead to headaches, sleepiness, and stagnant, stale, stuffy air. Poor concentration, loss of attention, increased heart rate and slight nausea may also be present. "
+      "250-400 is seen as normal outdoor values in a nature setting. With 400-1000 being considered the indoor standard. \n" +
+      "2000 - 5000 could lead to headaches, sleepiness, and stagnant, stale, stuffy air. Poor concentration, loss of attention, increased heart rate and slight nausea may also be present. "
   },
   CO: {
     name: 'CO Sensor',

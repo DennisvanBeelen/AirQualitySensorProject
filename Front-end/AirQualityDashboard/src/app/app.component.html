@@ -1,18 +1,17 @@
-<mat-toolbar color="primary">
-  <h1 class="toolbar-title" routerLink="/home" routerLinkActive="active">AirQualityCheck</h1>
-  <span class="toolbar-spacer"></span>
-  <button class="toolbar-button" color="accent" mat-raised-button routerLink="/dashboard" routerLinkActive="active">
-    Dashboard
-  </button>
-  <button class="toolbar-button" color="accent" mat-raised-button routerLink="/units" routerLinkActive="active">Units
-  </button>
-  <button class="toolbar-button" color="accent" mat-raised-button routerLink="/statistics" routerLinkActive="active">
-    Statistics
-  </button>
-  <button class="toolbar-button" color="accent" mat-raised-button routerLink="/information" routerLinkActive="active">
-    Information
-  </button>
-
+<mat-toolbar color="primary" class="toolbarDiv">
+    <h1 class="toolbar-title" routerLink="/home" routerLinkActive="active">AirQualityCheck</h1>
+    <span class="toolbar-spacer"></span>
+    <button class="toolbar-button" color="accent" mat-raised-button routerLink="/statistics" routerLinkActive="active">
+      Dashboard
+    </button>
+    <button class="toolbar-button" color="accent" mat-raised-button routerLink="/units" routerLinkActive="active">Units
+    </button>
+    <!--  <button class="toolbar-button" color="accent" mat-raised-button routerLink="/statistics" routerLinkActive="active">-->
+    <!--    Statistics-->
+    <!--  </button>-->
+    <button class="toolbar-button" color="accent" mat-raised-button routerLink="/information" routerLinkActive="active">
+      Information
+    </button>
 </mat-toolbar>
 <div class="router-container">
   <router-outlet></router-outlet>

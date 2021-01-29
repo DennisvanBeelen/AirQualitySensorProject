@@ -3,12 +3,12 @@
 }
 
 .toolbar-title{
+  width: 100px;
 
 }
 
 .toolbar-title:hover{
   cursor: pointer;
-  width: 100px;
 }
 
 .toolbar-button{
@@ -21,6 +21,10 @@
 
 .toolbar-container{
 
+}
+
+.toolbarDiv{
+  padding: 0 20%;
 }
 
 @media (max-width: 1200px) {

@@ -23,7 +23,7 @@ export class UnitsComponent implements OnInit {
 
   @Input() compactMode = false; // compact mode for dashboard.
 
-  dataSource;
+  dataSource: MatTableDataSource<any>;
   columnsToDisplay = ['location', 'id', 'timestamp', 'sensorData'];
   expandedElement: SensorUnits | null;
   extraAllowance = 0.1; // amount you can go over sensorMin and sensorMax before getting a sad smiley.
@@ -49,6 +49,7 @@ export class UnitsComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
+    console.log(filterValue.trim().toLowerCase())
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 

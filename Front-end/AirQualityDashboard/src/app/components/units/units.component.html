@@ -1,9 +1,9 @@
 <h1>Sensor units</h1>
 
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Search for Location or ID" #input>
-</mat-form-field>
+<!--<mat-form-field>-->
+<!--  <mat-label>Filter</mat-label>-->
+<!--  <input matInput (keyup)="applyFilter($event)" placeholder="Search for Location or ID" #input>-->
+<!--</mat-form-field>-->
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -34,7 +34,7 @@
                 class="sensorDataButton"
                 [ngStyle]="{'background-color': dataServ.getSafetyColorCode(sensorReadings.sensorType, sensorReadings.sensorValue)}"
                 *ngFor="let sensorReadings of dataServ.getMostRecentSensorReading(element.payload.doc.data().sensorData).data">
-          <div class="sensorDataStyling">{{sensorReadings.sensorName}}
+          <div class="sensorDataStyling">{{sensorReadings.sensorType}}
             : {{dataServ.roundSensorData(sensorReadings.sensorValue)}} {{sensorReadings.sensorDataUnit}}
 
             <div class="safety-scale-container"> <!--              !!! This is the scale !!!                  -->
