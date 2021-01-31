@@ -27,7 +27,8 @@ export class dataService {
     }
 
     createReadableTimestamp(timestamp) {
-        return new Date(timestamp.seconds * 1000).toLocaleString();
+        let options = {weekday:'short', hour:'2-digit', minute:'2-digit', second:'2-digit'}
+        return new Date(timestamp.seconds * 1000).toLocaleString('en-GB', options);
     }
 
     getSafetyColorCode(sensorName, sensorValue) {
@@ -158,4 +159,3 @@ export class dataService {
         return combinedValue / array.length;
     }
 }
-
