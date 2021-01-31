@@ -76,9 +76,7 @@ def main():
                 "Air quality": aq,
                 "DHT11 Temperature":dht_temp,
                 "DHT11 Humidity":dht_humidity,
-                "Barometer temperature":barometer_temp,
-                "Pressure":barometer_pressure,
-                "Altitude":barometer_altitude
+                "Barometer temperature":barometer_temp
             }
             json_str = json.dumps(reading_dict)
             print(json_str)

@@ -1,5 +1,8 @@
-id: 123456787
+id: CO2_test_2
 name: Office
-location: Office
+location: Office_
 collection: sensorData
-cert: ./serviceAccountKey.json
+password: azmZ8^G4u!7Ejo
+email: SensorDemoWoonkamer@tropicaltrading.nl
+firebase rest url: https://identitytoolkit.googleapis.com/v1/accounts
+firebase api key: AIzaSyCkjz9EwEC3ssB6ly-2andv5Gbvi9nDyjY

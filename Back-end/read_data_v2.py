@@ -23,7 +23,7 @@ def parse_config():
             config[config_attribute] = config_value
 
     except:
-        raise Exception("Config file was formatted!")
+        raise Exception("Config file was formatted improperly!")
 
 
 def check_config():
@@ -55,14 +55,14 @@ def set_up_sensors():
     sensors.append(sensordata.COSensor())
     sensors.append(sensordata.PressureSensor())
     sensors.append(sensordata.HumiditySensor())
-
+    
+    #sensors[0].warm_up()
+    calibrate = ask_for_calibration()
+    
     for sensor in sensors:
         sensor.set_up()
-    
-    #TO-DO: Uncomment
-    #sensors[0].warm_up()
-
-        
+        if calibrate:
+            sensor.calibrate()
     return sensors
 
 
@@ -74,16 +74,30 @@ def set_up():
     try:
         parse_config()
         check_config()
-
+        
         set_up_sensors()
 
         return set_up_firebase()
 
     except:
         raise
+    
+def ask_for_calibration():
+    print("Would you like to re-calibrate the gas sensors? Recommended for setup in a new environment.")
+    print("y / n ...")
+    response = input()
+    response = response.lower()
+    if response == "y":
+        calibrate = True
+    else:
+        calibrate = False
+        print("Skipping calibration")
+    
+    return calibrate
 
 
 def main():
+    
     firebase_client = set_up()
 
     while True:

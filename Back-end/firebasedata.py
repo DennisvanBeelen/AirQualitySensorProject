@@ -69,9 +69,9 @@ class FirebaseClient:
     def get_data_as_dict(self):
         self.timestamp = str(datetime.now().replace(microsecond=0))
         firebase_data = {
+            "id": self.id,
+            "location": self.location,
             "sensorData": {
-                "id": self.id,
-                "location": self.location,
                 self.timestamp: {
                     "data": self.get_sensor_data_array(),
                     "timestamp": firestore.SERVER_TIMESTAMP

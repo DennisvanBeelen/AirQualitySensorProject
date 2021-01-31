@@ -6,6 +6,7 @@ import adafruit_dht
 import adafruit_mcp3xxx.mcp3008 as MCP
 import adafruit_bmp280
 import math
+import time
 from adafruit_mcp3xxx.analog_in import AnalogIn
 
 from signal import signal, SIGINT, SIGTERM
@@ -22,7 +23,6 @@ class SensorOutput:
 
 class Sensor:
     def __init__(self, name):
-        print("init sensor")
         self.value = 0
         self.name = name
         self.output = {}
@@ -36,6 +36,9 @@ class Sensor:
             self.output[sensor_type].value = random.randint(sensor.sensor_min, sensor.sensor_max)
 
     def set_up(self):
+        pass
+    
+    def calibrate(self):
         pass
 
     def calc_value(self):
@@ -61,9 +64,9 @@ class Sensor:
         for x in range(180):
             percentage_complete = x / 180 * 100
             if percentage_complete % 10 == 0:
-                print(percentage_complete)
+                print(str(int(percentage_complete)) + "%")
                
-            sleep(1)
+            time.sleep(1)
 
 
 class HumiditySensor(Sensor):
@@ -71,9 +74,7 @@ class HumiditySensor(Sensor):
     def __init__(self):
         super().__init__("Humidity Sensor")
 
-        temperature_output = SensorOutput("Temperature", "°C", 10, 25)
         humidity_output = SensorOutput("Humidity", "%", 20, 75)
-        self.add_output(temperature_output)
         self.add_output(humidity_output)
 
         self.dht_device = any
@@ -87,7 +88,6 @@ class HumiditySensor(Sensor):
 
     def calc_value(self):
         try:
-            self.output["Temperature"].value = self.dht_device.temperature
             self.output["Humidity"].value = self.dht_device.humidity
 
         except RuntimeError as error:
@@ -102,11 +102,9 @@ class PressureSensor(Sensor):
 
         temperature_output = SensorOutput("Temperature", "°C", 10, 25)
         pressure_output = SensorOutput("Pressure", "hbar", 980, 1020)
-        altitude_output = SensorOutput("Altitude", "m", 1, 100)
 
         self.add_output(temperature_output)
         self.add_output(pressure_output)
-        self.add_output(altitude_output)
 
         self.barometer = any
 
@@ -115,9 +113,8 @@ class PressureSensor(Sensor):
         self.barometer = adafruit_bmp280.Adafruit_BMP280_I2C(i2c)
 
     def calc_value(self):
-        self.output["Temperature"].value = self.barometer.temperature
+        self.output["Temperature"].value = self.barometer.temperature - 1
         self.output["Pressure"].value = self.barometer.pressure
-        self.output["Altitude"].value = self.barometer.altitude
 
 
 class AnalogSensor(Sensor):
@@ -125,26 +122,52 @@ class AnalogSensor(Sensor):
         super().__init__(name)
         self.mcp = mcp
         self.channel = any
-        self.r0 = None
-        self.vrl = 3.3 #Spanningsbereik - (0V - 3V3)
-        self.slope = None
-        self.b = None
+        self.vref = 3 #Spanningsbereik - (0V - 3V3)
+        self.rl = 2 #Load resistance rl (in KOhm)
+        self.r0 = 0
+        self.slope = 0
+        self.b = 0
+        self.clean_rsr0 = 0
+        self.baseline_ppm = 0
 
     def set_up(self):
         spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
         cs = digitalio.DigitalInOut(board.D5)
         adc = MCP.MCP3008(spi, cs)
         self.channel = AnalogIn(adc, self.mcp)
+        
+    def calibrate(self):
+        voltage = 0
+        print("Calibrating sensor, please wait.")
+        for x in range(5000):
+            voltage += self.channel.voltage
+            time.sleep(0.01)
+            percentage_complete = x/5000*100
+            if x != 0 and percentage_complete % 2 == 0:
+                print(str(percentage_complete) + "%")
+                
+        avg_voltage = voltage / 5000
+        rs = (self.rl * (self.vref - avg_voltage)) / avg_voltage #Sensorweerstand
+        self.r0 = rs / self.clean_rsr0
+        print("100%")
+        print("r0 value of " + self.name + ": " + str(self.r0))
 
     def calc_value(self):
         output_key = list(self.output)[0]
-        
-        voltage = self.channel.voltage
-        rs = ((self.vrl * 10) / voltage) - 10
-        rsr0 = rs / self.r0
-        log_rsr0 = math.log10(rsr0)
-        log_ppm = (log_rsr0 - self.b) / self.slope
-        ppm = pow(10, log_ppm)
+        ppm = None
+        try:
+            voltage = self.channel.voltage
+            rs = (self.rl * (self.vref - voltage)) / voltage
+            rsr0 = rs / self.r0
+            log_rsr0 = math.log10(rsr0)
+            log_ppm = (log_rsr0 - self.b) / self.slope
+            ppm = pow(10, log_ppm) + self.baseline_ppm
+        except:
+            print("Value too high")
+            
+            
+        if not ppm or ppm > 2000:
+            ppm = 2000
         
         self.output[output_key].value = ppm
 
@@ -153,9 +176,10 @@ class COSensor(AnalogSensor):
 
     def __init__(self):
         super().__init__("CO Sensor", MCP.P0)
-        self.r0 = 1.095939929029228
+        self.r0 = 1.8
         self.slope = -0.7536
         self.b = 1.4189
+        self.clean_rsr0 = 11.7 #Rs/R0 in de schone lucht van de MQ7 (Constante waarde, zie documentatie)
         co_output = SensorOutput("CO", "ppm", 15, 75)
         self.add_output(co_output)
 
@@ -164,8 +188,12 @@ class CO2Sensor(AnalogSensor):
 
     def __init__(self):
         super().__init__("CO2 Sensor", MCP.P1)
-        self.r0 = 13.003959679866863
+        self.r0 = 9
         self.slope = -0.3597
         self.b = 0.7439
+        self.clean_rsr0 = 3.6 #Rs/R0 in de schone lucht van de MQ135 (Constante waarde, zie documentatie)
+        self.baseline_ppm = 400
         co2_output = SensorOutput("CO2", "ppm", 15, 75)
         self.add_output(co2_output)
+    
+    
