@@ -37,7 +37,7 @@
                                 [ngStyle]="{'background-color': dataServ.getSafetyColorCode(sensorReadings.sensorType, sensorReadings.sensorValue)}"
                                 *ngFor="let sensorReadings of element.data"
                                 (click)="sensorClicked(sensorReadings)">
-                            <div class="sensorDataStyling">{{sensorReadings.sensorName}}
+                            <div class="sensorDataStyling">{{sensorReadings.sensorType}}
                                 : {{dataServ.roundSensorData(sensorReadings.sensorValue)}} {{sensorReadings.sensorDataUnit}}
 
                                 <div class="safety-scale-container">

@@ -18,15 +18,18 @@ export class LineGraphOfOneSensorComponent implements OnInit, OnDestroy {
     @Input() sensorData;
     @Input() currentSensorUnit = 1;
     @Input() currentSensor = 1;
+    @Input() wantedLength = 50;
 
     dataLocation = 0;
-    wantedLength = 50;
 
     locationOfDataLineInGraph = 0;
-    locationOfMinimumLineInGraphData = 1;
+    locationOfMovingAverageLineInGraphData = 1;
     locationOfMaximumLineInGraphData = 2;
+
     minimumValueToDrawLine = 0.25;
     maximumValueToDrawLine = 2;
+
+    movingAverageSteps = 3;
 
     stopSubscription = new Subject();
 
@@ -34,35 +37,42 @@ export class LineGraphOfOneSensorComponent implements OnInit, OnDestroy {
 
     type = 'line';
     data = {
+
         labels: [],
         datasets: [
             {
                 label: 'NULL',
                 data: [],
-                borderColor: ['rgba(0, 0, 0, 0.6)'],
-                backgroundColor: ['rgba(0,0,0,0)']
+                backgroundColor: '#d5c8ea',
+                borderColor: '#000000',
+                borderWidth: 1,
+                type: 'bar',
+                order: 4
             },
             {
-                label: 'Minimum',
+                label: 'MovingAverage',
                 data: [],
-                borderColor: ['rgba(249, 16, 16, 0.5)'],
-                backgroundColor: ['rgba(0,0,0,0)'],
-                pointStyle: 'line'
+                borderColor: '#6098c2',
+                type: 'line',
+                pointStyle: 'line',
+                order: 1
             },
             {
-                label: 'Maximum',
+                label: 'Max',
                 data: [],
-                borderColor: ['rgba(249, 16, 16, 0.5)'],
-                backgroundColor: ['rgba(0,0,0,0)'],
-                pointStyle: 'line'
-
+                borderColor: 'rgba(240, 52, 52, .1)',
+                backgroundColor: 'rgba(42, 187, 155, .1)',
+                type: 'line',
+                pointStyle: 'line',
+                order: 1
             }
         ]
     };
     options = {
-        responsive: true,
-        maintainAspectRatio: false,
-        title: {display: false, text: this.wantedLength + ' measurements chart.'}
+      scales: { yAxes: [{ticks: {min:0}}]},
+      responsive: true,
+      maintainAspectRatio: false,
+      title: {display: false, text: this.wantedLength + ' measurements chart.'}
     };
 
 
@@ -93,29 +103,38 @@ export class LineGraphOfOneSensorComponent implements OnInit, OnDestroy {
 
     private populateGraph(sensorData) {
         this.clearGraph();
+        sensorData = this.dataService.cutArrayToWantedSize(sensorData, this.wantedLength);
 
         for (let i = 0; i < sensorData.length; i++) {
             this.data.labels.push(this.dataService.createReadableTimestamp(sensorData[i].timestamp));
             this.data.datasets[this.dataLocation].data.push(sensorData[i].data[this.currentSensor].sensorValue);
             this.addMinMaxValues(i);
         }
+        this.createMovingAverageLine(this.data.datasets[this.dataLocation].data);
     }
 
     private clearGraph() {
         this.data.labels = [];
         this.data.datasets[this.dataLocation].data = [];
-        this.data.datasets[this.locationOfMinimumLineInGraphData].data = [];
-        this.data.datasets[this.locationOfMaximumLineInGraphData].data = [];
+        this.data.datasets[this.locationOfMovingAverageLineInGraphData].data = [];
     }
 
     private addMinMaxValues(i: number) {
-        this.data.datasets[this.locationOfMinimumLineInGraphData].data.push(this.minimumValueToDrawLine);
-        this.data.datasets[this.locationOfMaximumLineInGraphData].data.push(this.maximumValueToDrawLine);
+        this.options.scales.yAxes[0].ticks.min = this.minimumValueToDrawLine;
+        this.data.datasets[this.locationOfMaximumLineInGraphData].data.push(this.maximumValueToDrawLine)
+    }
+
+    createMovingAverageLine(sensorData) {
+        const movingAverageDataSet = this.dataService.getMovingAverage(sensorData, this.movingAverageSteps);
+        this.data.datasets[this.locationOfMovingAverageLineInGraphData].data = movingAverageDataSet;
     }
 
     setMinMaxLineValues() {
         let sensorType = this.dataService.getCorrectSensorType(this.sensorData[this.currentSensorUnit].sensorData.getValue()[0].data[this.currentSensor].sensorType);
         this.minimumValueToDrawLine = sensorType.minimalValue;
+        if (this.minimumValueToDrawLine > 5 && this.minimumValueToDrawLine < 900) {
+          this.minimumValueToDrawLine -= 10;
+        }
         this.maximumValueToDrawLine = sensorType.maximumValue;
     }
 
