@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import random
 import busio
 import digitalio
@@ -136,6 +138,12 @@ class AnalogSensor(Sensor):
         adc = MCP.MCP3008(spi, cs)
         self.channel = AnalogIn(adc, self.mcp)
         
+    def get_calibration_values(self):
+        pass
+    
+    def set_calibration_values(self, r0):
+        pass
+        
     def calibrate(self):
         voltage = 0
         print("Calibrating sensor, please wait.")
@@ -150,7 +158,7 @@ class AnalogSensor(Sensor):
         rs = (self.rl * (self.vref - avg_voltage)) / avg_voltage #Sensorweerstand
         self.r0 = rs / self.clean_rsr0
         print("100%")
-        print("r0 value of " + self.name + ": " + str(self.r0))
+        self.set_calibration_values(self.r0)
 
     def calc_value(self):
         output_key = list(self.output)[0]
@@ -176,24 +184,50 @@ class COSensor(AnalogSensor):
 
     def __init__(self):
         super().__init__("CO Sensor", MCP.P0)
-        self.r0 = 1.8
+        self.r0 = self.get_calibration_values()
         self.slope = -0.7536
         self.b = 1.4189
         self.clean_rsr0 = 11.7 #Rs/R0 in de schone lucht van de MQ7 (Constante waarde, zie documentatie)
         co_output = SensorOutput("CO", "ppm", 15, 75)
         self.add_output(co_output)
+    
+    def set_calibration_values(self, r0):
+        f = open('calibration.txt', 'w')
+        f.write(str(r0))
+        f.close()
+        
+        
+    def get_calibration_values(self):
+        f = open("calibration.txt", 'r')
+        r0 = float(f.readline())
+        f.close()
+        return r0
+        
 
 
 class CO2Sensor(AnalogSensor):
 
     def __init__(self):
         super().__init__("CO2 Sensor", MCP.P1)
-        self.r0 = 9
+        self.r0 = self.get_calibration_values()
         self.slope = -0.3597
         self.b = 0.7439
         self.clean_rsr0 = 3.6 #Rs/R0 in de schone lucht van de MQ135 (Constante waarde, zie documentatie)
         self.baseline_ppm = 400
         co2_output = SensorOutput("CO2", "ppm", 15, 75)
         self.add_output(co2_output)
+        
+        
+    def set_calibration_values(self, r0):
+        f = open('calibration.txt', 'a')
+        f.write('\n' + str(r0))
+        f.close()
+        
+    def get_calibration_values(self):
+        f = open("calibration.txt", 'r')
+        f.readline()
+        r0 = float(f.readline())
+        f.close()
+        return r0
     
     

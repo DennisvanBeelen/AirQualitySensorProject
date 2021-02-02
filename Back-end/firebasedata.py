@@ -1,3 +1,4 @@
+# coding: utf-8
 from datetime import datetime
 from firebase_admin import firestore
 from google.oauth2.credentials import Credentials
@@ -7,14 +8,13 @@ import json
 
 
 class FirebaseClient:
-    def __init__(self, config, sensors):
-        print("init firebase data")
-
+    def __init__(self, config, sensors, print_readings):
         self.sensors = sensors
         self.id = config['id']
         self.name = config['name']
         self.location = config['location']
         self.collection = config['collection']
+        self.print_readings = print_readings
 
         self.firestore_client = self.set_up_firebase_connection(config)
 
@@ -78,7 +78,8 @@ class FirebaseClient:
                 }
             }
         }
-        print(firebase_data)
+        if self.print_readings:
+            print(firebase_data)
 
         return firebase_data
 

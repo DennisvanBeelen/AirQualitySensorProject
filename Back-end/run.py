@@ -1,10 +1,15 @@
+# coding: utf-8
 import os
 import time
 import sensordata
 import firebasedata
+import sys
 
 config = {}
 sensors = []
+CALIBRATE = False
+WARMUP = True
+PRINT_READINGS = False
 
 
 def parse_config():
@@ -49,25 +54,24 @@ def check_config():
 
 
 def set_up_sensors():
-    print('init setup sensors')
-
-    sensors.append(sensordata.CO2Sensor())
     sensors.append(sensordata.COSensor())
+    sensors.append(sensordata.CO2Sensor())
     sensors.append(sensordata.PressureSensor())
     sensors.append(sensordata.HumiditySensor())
     
-    #sensors[0].warm_up()
-    calibrate = ask_for_calibration()
+    if WARMUP:
+        sensors[0].warm_up()
+
     
     for sensor in sensors:
         sensor.set_up()
-        if calibrate:
+        if CALIBRATE:
             sensor.calibrate()
     return sensors
 
 
 def set_up_firebase():
-    return firebasedata.FirebaseClient(config, sensors)
+    return firebasedata.FirebaseClient(config, sensors, PRINT_READINGS)
 
 
 def set_up():
@@ -82,22 +86,39 @@ def set_up():
     except:
         raise
     
-def ask_for_calibration():
-    print("Would you like to re-calibrate the gas sensors? Recommended for setup in a new environment.")
-    print("y / n ...")
-    response = input()
-    response = response.lower()
-    if response == "y":
-        calibrate = True
-    else:
-        calibrate = False
-        print("Skipping calibration")
+def set_calibration(calibration = False):
+    global CALIBRATE
+    CALIBRATE = calibration
     
-    return calibrate
+def set_warmup(calibration=True):
+    global WARMUP
+    WARMUP = calibration
+    
+        
+def set_print_readings(calibration=True):
+    global PRINT_READINGS
+    PRINT_READINGS = calibration
 
+def help():
+    print("Usage:")
+    print("-c --calibrate: recalibrate the gas sensors")
+    print("-h --help: show usage hints")
+    print("-v --verbose: print sensor readings to the terminal")
+    print("-s --skip-warmup: skip warming up the sensors (only recommended if sensors are guaranteed to be warmed up)")
+    
 
 def main():
-    
+    for x in sys.argv:
+        if x.lower() == 'help' or x.lower() == '-h' or x.lower() == '--help':
+            help()
+            return
+        if x.lower() == '-c' or x.lower() == '--calibrate':
+            set_calibration(True)
+        if x.lower() == '-s' or x.lower() == '--skip-warmup':
+            set_warmup(False)
+        if x.lower() == '-v' or x.lower() == '--verbose':
+            set_print_readings(True)
+            
     firebase_client = set_up()
 
     while True:
@@ -107,4 +128,6 @@ def main():
         time.sleep(2)
 
 
-main()
+if __name__ == "__main__":
+    main()
+    
